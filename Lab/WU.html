@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Guo-Rong WU | Hemodynamic response &amp; Dynamic connectivity</title>
+    <meta name="author" content="Guo-Rong Wu">
+    
+    <meta name="description" content="Matlab packages for fMRI data analysis">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Guo-Rong WU">
+    <meta property="og:site_name" content="Brain Mapping">
+
+    
+    <meta property="og:image" content="">
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Brain Mapping" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="black">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Brain Mapping</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-HRF " href="/HRF">
+                            <i class="fa fa-book "></i>
+                            
+                            Resting-state HRF
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-DynamicBC " href="/DynamicBC">
+                            <i class="fa fa-book "></i>
+                            
+                            DynamicBC
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-Lab " href="/Lab">
+                            <i class="fa fa-users "></i>
+                            
+                            Lab
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            Search
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav black darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://psy.swu.edu.cn/u/cms/psych/201611/0613140929jq_031918256e9g_吴国榕.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">Guo-Rong WU</p>
+                        <p class="desc">理、工学博士</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    Home
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-HRF " href="/HRF">
+                    <i class="fa fa-book "></i>
+                    
+                    Resting-state HRF
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-DynamicBC " href="/DynamicBC">
+                    <i class="fa fa-book "></i>
+                    
+                    DynamicBC
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-Lab " href="/Lab">
+                    <i class="fa fa-users "></i>
+                    
+                    Lab
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    Search
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav black darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">Search</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper grey lighten-1">
+        <span class="breadcrumb">—♡—</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Guo-Rong WU</h1>
+    
+
+
+            </div>
+            <time class="blue-link-context" datetime="2016-12-28T17:01:13.000Z"><a href="/Lab/WU.html">2016-12-29</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Education-and-Work-Experience"><span class="section table-of-contents-text">Education and Work Experience</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Funding"><span class="section table-of-contents-text">Funding</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Publications"><span class="section table-of-contents-text">Publications</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#First-Corresponding-Author"><span class="section table-of-contents-text">First/Corresponding Author</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Co-author"><span class="section table-of-contents-text">Co-author</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#More-information"><span class="section table-of-contents-text">More information:</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Softwares"><span class="section table-of-contents-text">Softwares</span></a></li></ol>
+</div>
+
+
+            <div class="entry blue-link-context">
+                <p>ORCID ID: <a href="http://orcid.org/0000-0003-4918-3955" target="_blank" rel="noopener">0000-0003-4918-3955</a></p>
+<p><td bgcolor="#F0F8FF"><img src="/images/wu.jpg" hspace="20" align="Right" hight="0" width="280px">   </td></p>
+<h2 id="Education-and-Work-Experience"><a href="#Education-and-Work-Experience" class="headerlink" title="Education and Work Experience"></a>Education and Work Experience</h2><p>2017.07- current, Associate professor, Faculty of Psychology, Southwest University(SWU), Chongqing, China.<br>2014.03-2017.06, Lecturer, SWU.<br>2015.06-2015.11, Assistant, Department of Psychiatry and Medical Psychology, Ghent University, Belgium. </p>
+<p>2011.12-2015.11, PhD in Statistical Data Analysis, Faculty of Psychological and Pedagogical Sciences, Department of Data Analysis, Ghent University.<br>2010.09-2013.12, PhD in Biomedical Engineering, University of Electronic Science and Technology of China (UESTC).<br>2008.09-2010.06, MSc in Applied Mathematics, UESTC<br>2004.09-2008.06, BSc in Mathematics and Applied Mathematics, Fujian Normal University.</p>
+<h2 id="Funding"><a href="#Funding" class="headerlink" title="Funding"></a>Funding</h2><p>National Natural Science Foundation of China (NSFC, Grant No. 61403312) 2015~2017, Directed dynamical connectivity from spatio-temporal point process in resting state fMRI. </p>
+<p>NSFC (Grant No. 61876156) 2019~2022, Investigation of Non-invasive Brain Stimulation on Alcohol Use Disorders and Its Causal Inference.</p>
+<h2 id="Publications"><a href="#Publications" class="headerlink" title="Publications"></a>Publications</h2><h3 id="First-Corresponding-Author"><a href="#First-Corresponding-Author" class="headerlink" title="First/Corresponding Author"></a>First/Corresponding Author</h3><p>(<sup>*</sup> Corresponding Author，<sup>＃</sup>Contributed equally to this work)</p>
+<ol>
+<li><strong>Guorong Wu</strong>, Xujun Duan, Wei Liao, Qing Gao, and Huafu Chen<sup>*</sup>. “Kernel canonical-correlation Granger causality for multiple time series.” Phys Rev E, 2011, 83: 041921. </li>
+<li><strong>Guo-Rong Wu</strong>, Fuyong Chen, Dezhi Kang, Daniele Marinazzo<sup><em></em></sup>, Huafu Chen<sup></sup>. “Multi-scale causal connectivity analysis by canonical correlation: theory and application to epileptic brain.” IEEE Trans Biomed Eng 2011, 58(11): 3088 - 3096.  </li>
+<li><strong>Guo-Rong Wu</strong>, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo<sup>*</sup>. “A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data.” Medical Image Analysis 2013, 17:365-374 . </li>
+<li><strong>Guo-Rong Wu</strong>, Wei Liao, Sebastiano Stramaglia, Huafu Chen, Daniele Marinazzo <sup>*</sup>. “Recovering directed networks in neuroimaging datasets using partially conditioned Granger causality.” Brain Connectivity, 2013, 3(3): 294-301.  </li>
+<li><strong>Guo-Rong Wu</strong>, Sebastiano Stramaglia, Huafu Chen, Wei Liao <sup><em></em></sup>, Daniele Marinazzo<sup></sup> . “Mapping the voxel-wise effective connectome in resting state fMRI.” PLoS ONE, 2013, 8(9): e73670.</li>
+<li>Wei Liao<sup>#*</sup>, <strong>Guo-Rong Wu</strong><sup>#*</sup>, Qiang Xu<sup>#</sup>, Gong-Jun Ji, Zhiqiang Zhang, Yu-Feng Zang, Guangming Lu. “DynamicBC: A MATLAB Toolbox for Dynamic Brain Connectome Analysis.” Brain Connectivity, 2014, 4(10):780-90. </li>
+<li><strong>Guo-Rong Wu</strong>, Daniele Marinazzo<sup>*</sup>. “Point-process deconvolution of fMRI BOLD signal reveals effective connectivity alterations in chronic pain patients.” Brain Topography, 2014, 28(4): 541-547. </li>
+<li><strong>Guo-Rong Wu</strong>, Daniele Marinazzo. “Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications.” PeerJ PrePrints, 2015. </li>
+<li><strong>Guo-Rong Wu</strong>, Daniele Marinazzo. “Hemodynamic response function in resting brain: disambiguating neural events and autonomic effects.” bioRxiv, 2015. </li>
+<li><strong>Guo-Rong Wu</strong><sup>*</sup>, Daniele Marinazzo. “Sensitivity of the resting state haemodynamic response function estimation to autonomic nervous system fluctuations.” Philosophical Transactions of the Royal Society A, 2016, 374: 20150190.</li>
+<li><strong>Guo-Rong Wu</strong>, Chris Baeken<sup>*</sup>. “Longer depressive episode duration negatively influences HF-rTMS treatment response: a cerebellar metabolic deficiency?” Brain Imaging and Behavior, 2017, 11(1), 8-16. </li>
+<li>Luqing Wei, Hong Chen, <strong>Guo-Rong Wu</strong><sup>*</sup>. “Heart rate variability associated with grey matter volumes in striatal and limbic structures of the central autonomic network.” Brain Research, 2018, 1681: 14–20. </li>
+<li>Luqing Wei, Hong Chen, <strong>Guo-Rong Wu</strong><sup>*</sup>. “Structural Covariance of the Prefrontal-Amygdala Pathways Associated with Heart Rate Variability.” Frontiers in Human Neuroscience, 2018, in press. </li>
+<li><strong>Guo-Rong Wu</strong>, Chris Baeken, Peter Van Schuerbeek, Johan De Mey, Minghua Bi, Sarah C. Herremans<sup>*</sup>. “Accelerated repetitive transcranial magnetic stimulation does not influence grey matter volumes in regions related to alcohol relapse: an open-label exploratory study.” Drug and Alcohol Dependence, 2018(191), 210-214.</li>
+<li>Luqing Wei<sup>#</sup>, Nana Guo<sup>#</sup>, Chris Baeken, Minghua Bi, Xiaowan Wang, Jiang Qiu, <strong>Guo-Rong Wu</strong><sup>*</sup>. Grey matter volumes in the executive attention system predict individual differences in effortful control in young adults. Brain Topography, 2018, in press.</li>
+<li>Xiaowan Wang, Chris Baeken, Mengxia Fang, Jiang Qiu, Hong Chen, <strong>Guo-Rong Wu</strong><sup>*</sup>. Predicting trait-like individual differences in fear of pain in the healthy state using gray matter volume. Brain Imaging and Behavior, 2018, in press.</li>
+<li><strong>Guo-Rong Wu</strong>, Carol Di Perri, Vanessa Charland-Verville, Charlotte Martial, Steven Laureys and Daniele Marinazzo. “Modulation of the spontaneous hemodynamic response function across levels of consciousness.” bioRxiv, 2018.</li>
+<li><strong>Guo-Rong Wu</strong>, Rudi De Raedt, Peter Van Schuerbeek, Chris Baeken. “Opposite subgenual Cingulate Cortical functional connectivity and metabolic activity patterns in refractory melancholic Major Depression.” Brain Imaging and Behavior, 2018.</li>
+</ol>
+<h3 id="Co-author"><a href="#Co-author" class="headerlink" title="Co-author"></a>Co-author</h3><p>2019</p>
+<ol>
+<li>Chris Baeken, <strong>Guo-Rong Wu</strong>, and Kees van Heeringen. “Placebo aiTBS attenuates suicidal ideation and frontopolar cortical perfusion in major depression.” Translational Psychiatry, 2019, accepted</li>
+</ol>
+<p>2018</p>
+<ol>
+<li>D Rangaprakash, <strong>Guo-Rong Wu</strong>, D Marinazzo, X Hu, G Deshpande. “Hemodynamic response function (HRF) variability confounds resting‐state fMRI functional connectivity.” Magnetic resonance in medicine, 2018(80), 1697-1713</li>
+<li>D Rangaprakash, <strong>Guo-Rong Wu</strong>, D Marinazzo, X Hu, G Deshpande. “Parametrized Hemodynamic Response Function Data of Healthy Individuals Obtained from Resting-State Functional MRI in a 7T MRI Scanner.” Data in Brief, 2018(17), 1175-1179</li>
+<li>Gao X, Liang Q, <strong>Guo-Rong Wu</strong>, She Y, Sui N, Chen H. “Decreased resting-state BOLD regional homogeneity and the intrinsic functional connectivity within dorsal striatum is associated with greater impulsivity in food-related decision-making and BMI change at 6-month follow up.” Appetite, 2018(127): 69-78</li>
+<li>Chris Baeken, Josefien Dedoncker, Jonathan Remue, <strong>Guo-Rong Wu</strong>, Marie-Anne Vanderhasselt, Sara De Witte, Tasha Poppa, Jill M. Hooley, Rudi De Raedt. “One MRI-compatible tDCS session attenuates ventromedial cortical perfusion when exposed to verbal criticism: the role of perceived criticism.” Human Brain Mapping, in press</li>
+<li>J Koenig, B Abler, I Agartz, T Åkerstedt, OA Andreassen, M Anthony, …, <strong>Guo-Rong Wu</strong>, H Yoo. “Cortical Thickness and Resting State Cardiac Function Across the Lifespan: A Cross-Sectional Pooled Mega Analysis.” Open Science Framework</li>
+<li>Baeken C, Duprat R, <strong>Guo-Rong Wu</strong>, De Raedt R. Accelerated Intermittent Theta Burst Stimulation Rapidly Attenuates Depressive Symptoms and Suicide Ideation in Major Depression: Insights from Brain Perfusion and Functional Connectivity.” Biological Psychiatry 2018 (83): S54</li>
+<li>Josefien Dedoncker, Marie-Anne Vanderhasselt, Jonathan Remue, Sara De Witte, <strong>Guo-Rong Wu</strong>, Jill M. Hooley, Rudi De Raedt, Chris Baeken. Prefrontal TDCS attenuates medial prefrontal connectivity upon being criticized in individuals scoring high on perceived criticism. Brain Imaging and Behavior, 2018, in press.</li>
+</ol>
+<p>2017</p>
+<ol>
+<li>Chris Baeken, Romain Duprat, <strong>Guo-Rong Wu</strong>, Rudi De Raedt and Kees van Heeringen, “Subgenual anterior cingulate – medial orbitofrontal functional connectivity in medication-resistant major depression: A neurobiological marker for accelerated intermittent Theta Burst Stimulation treatment?” Biological Psychiatry: Cognitive Neuroscience and Neuroimaging. 2017,2(7), 556-565.</li>
+<li>Liu, W., Wei, D., Chen, Q., Yang, W., Meng, J., <strong>Guo-Rong Wu</strong>, Bi, T., Zhang, Q., Zuo, X., &amp; Qiu, J. “Longitudinal test-retest neuroimaging data from healthy young adults in southwest China.” Scientific Data, 2017, 4, 170017.</li>
+<li>Chris Baeken, Jonathan Remue, Marie-Anne Vanderhasselt, Andre R Brunoni, Sara De Witte, Romain Duprat, Ernst HW Koster, Rudi De Raedt, <strong>Guo-Rong Wu</strong>. “Increased left prefrontal brain perfusion after MRI compatible tDCS attenuates momentary ruminative self-referential thoughts.” Brain Stimulation, 2017, 10(6), 1088-1095.</li>
+<li>Romain Duprat, <strong>Guo-Rong Wu</strong>, Rudi De Raedt, Chris Baeken. “Accelerated iTBS treatment in depressed patients differentially modulates reward system activity based on anhedonia.” The World Journal of Biological Psychiatry, 2017.</li>
+<li>Fuxiang Chen<sup>#</sup>, Fuyong Chen<sup>#</sup>, Zhanfang Shang, Yuan Shui, <strong>Guorong Wu</strong>, Chen Liu, Zhangya Lin, Yuanxiang Lin, Lianghong Yu, Dezhi Kang, Wei Tao, Yongjie Li. “White matter microstructure degenerates in patients with postherpetic neuralgia.” Neuroscience Letters, 2017, 656(24), 152-157</li>
+<li>Chris Baeken, <strong>Guo-Rong Wu</strong>, Rudi De Raedt. “Dorsomedial frontal cortical metabolic differences of comorbid generalized anxiety disorder in refractory major depression: A [<sup>18</sup>F] FDG PET brain imaging study.” Journal of Affective Disorders, 2017, 227, 550–553</li>
+</ol>
+<p>2016</p>
+<ol>
+<li>WANG, K.<sup>#</sup>, <strong>Guo-Rong Wu</strong><sup>#</sup>, HOU, X., WEI, D., LIU, H., &amp; QIU, J. “From groupwise to individual brain functional networks parcellation and application”. Chinese Science Bulletin, 2016, 61(27), 3022-3035.</li>
+<li>Van, Heeringen K and <strong>Guo-Rong Wu</strong> and Vervaet, M and Vanderhasselt, M. A. and Baeken, C. “Decreased resting state metabolic activity in frontopolar and parietal brain regions is associated with suicide plans in depressed individuals.” Journal of Psychiatric Research, 2016, 84, 243-248.</li>
+<li>Romain Duprat, Rudi De Raedt, <strong>Guo-Rong Wu</strong>, and Chris Baeken. “Intermittent Theta Burst Stimulation Increases Reward Responsiveness in Individuals with Higher Hedonic Capacity.” Front Hum Neurosci. 2016; 10: 294.</li>
+<li>Sebastiano Stramaglia, Leonardo Angelini, <strong>Guorong Wu</strong>, Jesus Cortes, Luca Faes and Daniele Marinazzo. “Synergetic and redundant information flow detected by unnormalized Granger causality: application to resting state fMRI.” IEEE Transactions on Biomedical Engineering, 2016, 63(12), 2518-2524.</li>
+</ol>
+<p>2015</p>
+<ol>
+<li>Baeken, C., Marinazzo, D., Everaert, H., <strong>Guo-Rong Wu</strong>, Hove, C. V., &amp; Audenaert, K., et al. “The impact of accelerated HF-rTMS on the subgenual anterior cingulate cortex in refractory unipolar major depression: insights from <sup>18</sup>FDG PET brain imaging.” Brain Stimulation, 2015, 8(2), 845-848.</li>
+<li>Zhang, J., Wei, L., Hu, X., Xie, B., Zhang, Y., &amp; <strong>Guo-Rong Wu</strong>, et al. “Akinetic-rigid and tremor-dominant parkinson‘s disease patients show different patterns of intrinsic brain activity.” Parkinsonism &amp; Related Disorders, 2015, 21(1), 23-30.</li>
+<li>Li, M., Wang, J., Liu, F., Chen, H., Lu, F., &amp; <strong>Guo-Rong Wu</strong>, et al. “Handedness- and brain size-related efficiency differences in small-world brain networks: a resting-state functional magnetic resonance imaging study.” Brain Connectivity, 2015, 5(4), 259-265.</li>
+<li>Kang, D. Z., Chen, F. Y., Wang, F. Y., <strong>Guo-Rong Wu</strong>, Liu, Y., Wu, G., Yu, L. Lin, Y. &amp; Lin, Z. Y. “Brain gray matter volume changes associated with motor symptoms in patients with Parkinson’s disease.” Chinese Neurosurgical Journal, 2015, 1(1), 9.</li>
+</ol>
+<p>2014</p>
+<ol>
+<li>Marinazzo, D.,  <strong>Guo-Rong Wu</strong>, Pellicoro, M., &amp; Stramaglia, S. “Information transfer in the brain: insights from a unified approach.” Understanding Complex Systems, 2014, 7(1), 87-110.</li>
+<li>Baeken, C., Marinazzo, D., <strong>Guo-Rong Wu</strong>, Schuerbeek, P. V., Mey, J. D., &amp; Marchetti, I., et al. “Accelerated HF-rTMS in treatment-resistant unipolar depression: insights from subgenual anterior cingulate functional connectivity.” World Journal of Biological Psychiatry, 2014,15(4), 286-297.</li>
+<li>Ding, J., An, D., Liao, W., <strong>Guo-Rong Wu</strong>, Xu, Q., &amp; Zhou, D., et al. “Abnormal functional connectivity density in psychogenic non-epileptic seizures.” Epilepsy Research, 2014, 108(7), 1184-94.</li>
+<li>Marinazzo, D., Pellicoro, M., <strong>Guo-Rong Wu</strong>, Angelini, L., Cortés, J. M., &amp; Stramaglia, S. “Information transfer and criticality in the ising model on the human connectome.” Plos One, 2014,9(4), 3-7.</li>
+<li>Baeken, C., Marinazzo, D., Van, S. P., <strong>Guo-Rong Wu</strong>, De, M. J., &amp; Luypaert, R., et al. “Left and right amygdala - mediofrontal cortical functional connectivity is differentially modulated by harm avoidance.” Plos One, 2014, 9(4), e95740.</li>
+<li>Wei, L., Zhang, J., Long, Z., <strong>Guo-Rong Wu</strong>, Hu, X., Zhang, Y., &amp; Wang, J. “Reduced topological efficiency in cortical-basal Ganglia motor network of Parkinson’s disease: a resting state fMRI study.” PloS one, 2014, 9(10), e108124.</li>
+<li>Baeken, C., Marinazzo, D., Claes, S., <strong>Guo-Rong Wu</strong>, Van Schuerbeek, P., De Mey, J., Luypaert, R. &amp; De Raedt, R. “COMT Val158Met genotypes differentially influence subgenual cingulate functional connectivity in healthy females.” Frontiers in human neuroscience, 2014, 8, 481.</li>
+</ol>
+<p>2013</p>
+<ol>
+<li>Ju-Rong Ding , Dongmei An , Wei Liao, Jinmei Li, <strong>Guo-Rong Wu</strong>, Qiang Xu, Zhiliang Long, Qiyong Gong, Dong Zhou , Olaf Sporns, Huafu Chen. “Altered Functional and Structural Connectivity Networks in Psychogenic Non-Epileptic Seizures.” PloS one, 2013, 8(5), e63850.</li>
+</ol>
+<p>2012</p>
+<ol>
+<li>Sebastiano Stramaglia, <strong>Guorong Wu</strong>, Mario Pellicoro and Daniele Marinazzo. “Expanding the transfer entropy to identify information circuits in complex systems.” PHYSICAL REVIEW E, 2012, 86(6), 066211.</li>
+<li>Daniele Marinazzo, <strong>Guorong Wu</strong>, Mario Pellicoro, L Angelini, Sebastiano Stramaglia. “Information Flow in Networks and the Law of Diminishing Marginal Returns: Evidence from Modeling and Human Electroencephalographic Recordings.” PLoS ONE 2012, 7(9): e45026.</li>
+</ol>
+<h3 id="More-information"><a href="#More-information" class="headerlink" title="More information:"></a>More information:</h3><p><a href="http://scholar.google.com/citations?hl=en&amp;user=BC0dWQsAAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
+<h2 id="Softwares"><a href="#Softwares" class="headerlink" title="Softwares"></a>Softwares</h2><ol>
+<li><a href="/images/BrainGPS.png">Brain GPS</a></li>
+<li><a href="/DynamicBC/index.html">DynamicBC</a></li>
+<li><a href="https://www.nitrc.org/projects/rshrf/" target="_blank" rel="noopener">rsHRF</a></li>
+</ol>
+
+                
+
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large black">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect blue" title="Return to top"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse grey darken-1" data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer black darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">Social</h5>
+                
+                    <a class="social-link" href="https://www.researchgate.net/profile/Guo-Rong_Wu" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/guorongwu" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">Links</h5>
+                
+                    <a class="social-link" href="http://fcon_1000.projects.nitrc.org/indi/retro/southwestuni_qiu_index.html" target="_blank">Data Sharing</a>
+                
+                    <a class="social-link" href="http://psy.swu.edu.cn" target="_blank">Faculty of Psychology (SWU,西南大学心理学部)</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('yellow lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-course').append('<span class="new badge blue"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

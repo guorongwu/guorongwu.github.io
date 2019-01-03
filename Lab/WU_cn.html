@@ -1,0 +1,547 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>吴国榕 | Hemodynamic response &amp; Dynamic connectivity</title>
+    <meta name="author" content="Guo-Rong Wu">
+    
+    <meta name="description" content="Matlab packages for fMRI data analysis">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="吴国榕">
+    <meta property="og:site_name" content="Brain Mapping">
+
+    
+    <meta property="og:image" content="">
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Brain Mapping" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="black">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Brain Mapping</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-HRF " href="/HRF">
+                            <i class="fa fa-book "></i>
+                            
+                            Resting-state HRF
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-DynamicBC " href="/DynamicBC">
+                            <i class="fa fa-book "></i>
+                            
+                            DynamicBC
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-Lab " href="/Lab">
+                            <i class="fa fa-users "></i>
+                            
+                            Lab
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            Search
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav black darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://psy.swu.edu.cn/u/cms/psych/201611/0613140929jq_031918256e9g_吴国榕.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">Guo-Rong WU</p>
+                        <p class="desc">理、工学博士</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    Home
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-HRF " href="/HRF">
+                    <i class="fa fa-book "></i>
+                    
+                    Resting-state HRF
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-DynamicBC " href="/DynamicBC">
+                    <i class="fa fa-book "></i>
+                    
+                    DynamicBC
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-Lab " href="/Lab">
+                    <i class="fa fa-users "></i>
+                    
+                    Lab
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    Search
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav black darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">Search</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper grey lighten-1">
+        <span class="breadcrumb">—♡—</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>吴国榕</h1>
+    
+
+
+            </div>
+            <time class="blue-link-context" datetime="2016-12-28T17:01:13.000Z"><a href="/Lab/WU_cn.html">2016-12-29</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#联系方式："><span class="section table-of-contents-text">联系方式：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#联系地址："><span class="section table-of-contents-text">联系地址：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#个人主页："><span class="section table-of-contents-text">个人主页：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#教育经历："><span class="section table-of-contents-text">教育经历：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#科研项目："><span class="section table-of-contents-text">科研项目：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#研究兴趣及方向："><span class="section table-of-contents-text">研究兴趣及方向：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#讲授课程："><span class="section table-of-contents-text">讲授课程：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#研究论文："><span class="section table-of-contents-text">研究论文：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#软件开发："><span class="section table-of-contents-text">软件开发：</span></a></li></ol>
+</div>
+
+
+            <div class="entry blue-link-context">
+                <h3 id="联系方式："><a href="#联系方式：" class="headerlink" title="联系方式："></a>联系方式：</h3><p>Email: <a href="mailto:&#x67;&#114;&#x6f;&#x6e;&#119;&#x75;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;" target="_blank" rel="noopener">&#x67;&#114;&#x6f;&#x6e;&#119;&#x75;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>, <a href="mailto:&#x67;&#117;&#x6f;&#x72;&#111;&#x6e;&#x67;&#119;&#117;&#64;&#115;&#x77;&#x75;&#x2e;&#x65;&#100;&#117;&#x2e;&#x63;&#x6e;" target="_blank" rel="noopener">&#x67;&#117;&#x6f;&#x72;&#111;&#x6e;&#x67;&#119;&#117;&#64;&#115;&#x77;&#x75;&#x2e;&#x65;&#100;&#117;&#x2e;&#x63;&#x6e;</a></p>
+<h3 id="联系地址："><a href="#联系地址：" class="headerlink" title="联系地址："></a>联系地址：</h3><p>重庆市北碚区天生路2号，西南大学心理学部410室 </p>
+<h3 id="个人主页："><a href="#个人主页：" class="headerlink" title="个人主页："></a>个人主页：</h3><p><a href="http://guorongwu.weebly.com" target="_blank" rel="noopener">http://guorongwu.weebly.com</a><br><a href="https://guorongwu.github.io">https://guorongwu.github.io</a></p>
+<h3 id="教育经历："><a href="#教育经历：" class="headerlink" title="教育经历："></a>教育经历：</h3><p>2011/11-2015/10，Ghent University，统计数据分析专业，理学博士<br>2010/09-2013/12，电子科技大学，生物医学工程专业，工学博士<br>2008/09-2010/06，电子科技大学，应用数学专业，转为硕博连读<br>2004/09-2008/06，福建师范大学，数学与应用数学专业，理学学士</p>
+<h3 id="科研项目："><a href="#科研项目：" class="headerlink" title="科研项目："></a>科研项目：</h3><ol>
+<li>国家自然科学基金面上项目，无创脑刺激治疗酒精使用障碍的因果调控机制研究，2019/01—2022/12，主持。</li>
+<li>国家自然科学基金青年项目，时空点过程重构的静息态fMRI动态有向脑连接研究，2015/01—2017/12，主持。</li>
+<li>中央高校基本科研业务费学科团队项目，静息态点过程的动态脑连接网络研究，2014/03—2014/12，主持。</li>
+<li>西南大学博士基金项目，静息态脑活动与脑连接研究，2017/01－2019/12，主持</li>
+</ol>
+<h3 id="研究兴趣及方向："><a href="#研究兴趣及方向：" class="headerlink" title="研究兴趣及方向："></a>研究兴趣及方向：</h3><p>发展基于神经影像数据的动态脑功能活动和脑连接分析算法，开发相应的集成工具包，与统计分析方法相结合应用于心理学和临床疾病研究中。  </p>
+<h3 id="讲授课程："><a href="#讲授课程：" class="headerlink" title="讲授课程："></a>讲授课程：</h3><p><a href="https://psystat.github.io" target="_blank" rel="noopener">心理统计学</a><br>高级心理统计与测量<br>磁共振研究与技术<br><a href="https://psystat.github.io" target="_blank" rel="noopener">高等数学</a></p>
+<h3 id="研究论文："><a href="#研究论文：" class="headerlink" title="研究论文："></a>研究论文：</h3><p>见<a href="/Lab/WU.html">展开</a> 或 <a href="http://scholar.google.com/citations?hl=en&amp;user=BC0dWQsAAAAJ" target="_blank" rel="noopener">Google学术</a></p>
+<h3 id="软件开发："><a href="#软件开发：" class="headerlink" title="软件开发："></a>软件开发：</h3><ol>
+<li><a href="/images/BrainGPS.png">Brain GPS</a></li>
+<li><a href="/DynamicBC/index.html">DynamicBC</a></li>
+<li><a href="https://www.nitrc.org/projects/rshrf/" target="_blank" rel="noopener">rsHRF</a></li>
+</ol>
+
+                
+
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large black">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect blue" title="Return to top"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse grey darken-1" data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer black darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">Social</h5>
+                
+                    <a class="social-link" href="https://www.researchgate.net/profile/Guo-Rong_Wu" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/guorongwu" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">Links</h5>
+                
+                    <a class="social-link" href="http://fcon_1000.projects.nitrc.org/indi/retro/southwestuni_qiu_index.html" target="_blank">Data Sharing</a>
+                
+                    <a class="social-link" href="http://psy.swu.edu.cn" target="_blank">Faculty of Psychology (SWU,西南大学心理学部)</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('yellow lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-course').append('<span class="new badge blue"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

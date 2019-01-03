@@ -1,0 +1,553 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Dynamic Brain Connectome Analysis Toolbox | Hemodynamic response &amp; Dynamic connectivity</title>
+    <meta name="author" content="Guo-Rong Wu">
+    
+    <meta name="description" content="Matlab packages for fMRI data analysis">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Dynamic Brain Connectome Analysis Toolbox">
+    <meta property="og:site_name" content="Brain Mapping">
+
+    
+    <meta property="og:image" content="">
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Brain Mapping" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="black">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Brain Mapping</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-HRF " href="/HRF">
+                            <i class="fa fa-book "></i>
+                            
+                            Resting-state HRF
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-DynamicBC " href="/DynamicBC">
+                            <i class="fa fa-book "></i>
+                            
+                            DynamicBC
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-Lab " href="/Lab">
+                            <i class="fa fa-users "></i>
+                            
+                            Lab
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            Search
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav black darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://psy.swu.edu.cn/u/cms/psych/201611/0613140929jq_031918256e9g_吴国榕.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">Guo-Rong WU</p>
+                        <p class="desc">理、工学博士</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    Home
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-HRF " href="/HRF">
+                    <i class="fa fa-book "></i>
+                    
+                    Resting-state HRF
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-DynamicBC " href="/DynamicBC">
+                    <i class="fa fa-book "></i>
+                    
+                    DynamicBC
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-Lab " href="/Lab">
+                    <i class="fa fa-users "></i>
+                    
+                    Lab
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    Search
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav black darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">Search</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper grey lighten-1">
+        <span class="breadcrumb">—♡—</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Dynamic Brain Connectome Analysis Toolbox</h1>
+    
+
+
+            </div>
+            <time class="blue-link-context" datetime="2016-12-28T16:15:01.000Z"><a href="/DynamicBC/index.html">2016-12-29</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Download-DynamicBC"><span class="section table-of-contents-text">Download DynamicBC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#To-install-DynamicBC"><span class="section table-of-contents-text">To install DynamicBC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Manual"><span class="section table-of-contents-text">Manual</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Forum"><span class="section table-of-contents-text">Forum</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Citation"><span class="section table-of-contents-text">Citation</span></a></li></ol>
+</div>
+
+
+            <div class="entry blue-link-context">
+                <style> 
+img {border:0px; margin:10px 10px; padding:0px 0px;} 
+</style> 
+
+<table cellpadding="0" width="0"><td bgcolor="#FFFFFF"><img src="https://github.com/guorongwu/DynamicBC/raw/master/DynamicBC_logo.gif" hspace="0" align="LEFT" hight="0" width="120px"> Dynamic brain connectome (DynamicBC) analysis toolbox is a Matlab toolbox to calculate Dynamic Functional Connectivity (d-FC) and Dynamic Effective Connectivity (d-EC). Sliding window analysis (Bivariate Pearson correlation and Granger causality) and time varying parameter regression method (<strong>Flexible Least Squares</strong>) are two dynamic analysis strategies for time-variant connectivity analysis in the DynamicBC. <strong>Granger causality density/strength (GCD/GCS)</strong> and functional connectivity density/strength (FCD/FCS) analysis would be performed in this toolbox.<br></td></table>
+
+
+<hr>
+<h2 id="Download-DynamicBC"><a href="#Download-DynamicBC" class="headerlink" title="Download DynamicBC"></a>Download DynamicBC</h2><p><a href="/DynamicBC/DynamicBC2.1_20180526.zip">Click here</a> (<a href="http://restfmri.net/DynamicBC" target="_blank" rel="noopener">http://restfmri.net/DynamicBC</a>) to download the latest DynamicBC version (DynamicBC2.1_20180526).</p>
+<p>DynamicBC Manual (version 1.3, updated at 2017-07-08) in Chinese can be downloaded <a href="/DynamicBC/DynamicBC_Manual.pdf">here</a></p>
+<p>If you install a new version of Matlab (&gt;2015a) and DynamicBC ver 1.2, please modify some codes <a href="/DynamicBC/matlab_new.html">here</a> .</p>
+<h2 id="To-install-DynamicBC"><a href="#To-install-DynamicBC" class="headerlink" title="To install DynamicBC"></a>To install DynamicBC</h2><p>Unzip the DynamicBC zip file in the folder of your choice<br>Start Matlab, Change the Matlab path to the DynamicBC folder you have just uncompressed, Type:</p>
+<blockquote>
+<p><strong>DynamicBC</strong> </p>
+</blockquote>
+<p>and press enter on the Matlab prompt</p>
+<h2 id="Manual"><a href="#Manual" class="headerlink" title="Manual"></a>Manual</h2><p>The PDF Manual (DynamicBC 1.1) can be downloaded <a href="http://pub.restfmri.net/index.php?dir=&amp;file=Manual%20DynamicBC1.1_20140710.pdf" target="_blank" rel="noopener">here</a> (<a href="http://restfmri.net/DynamicBC)" target="_blank" rel="noopener">http://restfmri.net/DynamicBC)</a>.<br><img src="/DynamicBC/dynamicBC.svg" alt="DynamicBC"><br>DynamicBC assumed you organized the data in following way:<br><img src="/DynamicBC/Data_organization.svg" alt="Data Organization"><br>Here are some screenshots:</p>
+<table><td><img src="/DynamicBC/ROI.png" border="0" width="160" height="238"></td><td><img src="/DynamicBC/FC.png" hspace="5" width="250" height="238"></td><td><img src="/DynamicBC/EC.png" border="0" width="250" height="238"></td></table>
+
+
+
+<h2 id="Forum"><a href="#Forum" class="headerlink" title="Forum"></a>Forum</h2><p>If you have any question on DynamicBC, please visit <a href="http://restfmri.net/forum/DynamicBC" target="_blank" rel="noopener">DynamicBC forum</a> and make a post.</p>
+<h2 id="Citation"><a href="#Citation" class="headerlink" title="Citation"></a>Citation</h2><p>Wei Liao,<sup>#*</sup> Guo-Rong Wu,<sup>#*</sup> Qiang Xu,<sup>*</sup> Gong-Jun Ji, Zhiqiang Zhang, Yu-Feng Zang, and Guangming Lu (2014). DynamicBC: a matlab toolbox for dynamic brain connectome analysis. Brain Connectivity, 4(10), 780-90. <a href="https://github.com/guorongwu/DynamicBC/blob/master/doc/2014_DynamicBC.pdf" target="_blank" rel="noopener">PDF</a> (<sup>#</sup> corresponding author，<sup>*</sup>contributed equally to this work)</p>
+<hr>
+
+                
+
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large black">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect blue" title="Return to top"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse grey darken-1" data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer black darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">Social</h5>
+                
+                    <a class="social-link" href="https://www.researchgate.net/profile/Guo-Rong_Wu" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/guorongwu" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">Links</h5>
+                
+                    <a class="social-link" href="http://fcon_1000.projects.nitrc.org/indi/retro/southwestuni_qiu_index.html" target="_blank">Data Sharing</a>
+                
+                    <a class="social-link" href="http://psy.swu.edu.cn" target="_blank">Faculty of Psychology (SWU,西南大学心理学部)</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('yellow lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-course').append('<span class="new badge blue"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword blue lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
