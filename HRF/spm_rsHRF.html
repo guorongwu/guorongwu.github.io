@@ -203,11 +203,11 @@
             <div class="entry blue-link-context">
                 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>可通过以下网址下载：<br><a href="https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF" target="_blank" rel="noopener">https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF</a><br><a href="https://www.nitrc.org/projects/rshrf/" target="_blank" rel="noopener">https://www.nitrc.org/projects/rshrf/</a><br>直接下载地址：<a href="https://github.com/compneuro-da/rsHRF" target="_blank" rel="noopener">rsHRF</a>, 点击Clone or Donwload</p>
 <h2 id="PPT手册"><a href="#PPT手册" class="headerlink" title="PPT手册"></a>PPT手册</h2><p>在rsHRF的安装包里面带有rsHRF.pptx的文件，该文件简单介绍了该插件的安装和使用方式。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>必须将rsHRF工具包解压后放置在 ./SPM/toolbox/ (请保证解压后有rsHRF.m文件的路径为: ./SPM/toolbox/rsHRF/rsHRF.m, 不能处于多级目录下。)<br>在command windows里面启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm fmri</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>代码安装：直接运行代码rsHRF_install_SPM.m即可完成安装。<br>手动安装：必须将rsHRF工具包解压后放置在 ./SPM/toolbox/ (请保证解压后有rsHRF.m文件的路径为: ./SPM/toolbox/rsHRF/rsHRF.m, 不能处于多级目录下。)<br>在command windows里面启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm fmri</span><br></pre></td></tr></table></figure></p>
 <p>之后，即可以通过spm的batch界面处理单个被试的静息态HRF去卷积分析；此时，可在command windows里面启动GUI：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsHRF</span><br></pre></td></tr></table></figure></p>
 <p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm_rsHRF</span><br></pre></td></tr></table></figure></p>
 <p>或在spm界面上的toolbox下拉框内可见rsHRF，直接点击即可。<br><img src="/HRF/rsHRF_GUI.png" alt=""></p>
-<h2 id="示例job"><a href="#示例job" class="headerlink" title="示例job"></a>示例job</h2><p>在spm batch editor里面load batch (在工具包里面的demo_jobs里面带有四个batch文件可供选择)</p>
+<h2 id="示例job"><a href="#示例job" class="headerlink" title="示例job"></a>示例job</h2><p>在spm batch editor里面load batch (在工具包里面的demo_jobs里面带有多个batch文件可供选择)</p>
 <h3 id="体素水平上的分析-voxel-level-analysis"><a href="#体素水平上的分析-voxel-level-analysis" class="headerlink" title="体素水平上的分析(voxel-level analysis)"></a>体素水平上的分析(voxel-level analysis)</h3><blockquote>
 <p>个体空间上的静息态HRF估计及去卷积 (推荐!)</p>
 </blockquote>
