@@ -196,18 +196,29 @@
             
 
             <div class="toc blue-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#下载"><span class="section table-of-contents-text">下载</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PPT手册"><span class="section table-of-contents-text">PPT手册</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#安装"><span class="section table-of-contents-text">安装</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#示例job"><span class="section table-of-contents-text">示例job</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#体素水平上的分析-voxel-level-analysis"><span class="section table-of-contents-text">体素水平上的分析(voxel-level analysis)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#ROI水平的静息态HRF估计及去卷积"><span class="section table-of-contents-text">ROI水平的静息态HRF估计及去卷积</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#下载"><span class="section table-of-contents-text">下载</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PPT手册"><span class="section table-of-contents-text">PPT手册</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#安装"><span class="section table-of-contents-text">安装</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#示例job"><span class="section table-of-contents-text">示例job</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#测试数据"><span class="section table-of-contents-text">测试数据</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#体素水平上的分析-voxel-level-analysis"><span class="section table-of-contents-text">体素水平上的分析(voxel-level analysis)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#ROI水平的静息态HRF估计及去卷积"><span class="section table-of-contents-text">ROI水平的静息态HRF估计及去卷积</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#注意"><span class="section table-of-contents-text">注意</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry blue-link-context">
                 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>可通过以下网址下载：<br><a href="https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF" target="_blank" rel="noopener">https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF</a><br><a href="https://www.nitrc.org/projects/rshrf/" target="_blank" rel="noopener">https://www.nitrc.org/projects/rshrf/</a><br>直接下载地址：<a href="https://github.com/compneuro-da/rsHRF" target="_blank" rel="noopener">rsHRF</a>, 点击Clone or Donwload</p>
-<h2 id="PPT手册"><a href="#PPT手册" class="headerlink" title="PPT手册"></a>PPT手册</h2><p>在rsHRF的安装包里面带有rsHRF.pptx的文件，该文件简单介绍了该插件的安装和使用方式。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>代码安装：直接运行代码rsHRF_install_SPM.m即可完成安装。<br>手动安装：必须将rsHRF工具包解压后放置在 ./SPM/toolbox/ (请保证解压后有rsHRF.m文件的路径为: ./SPM/toolbox/rsHRF/rsHRF.m, 不能处于多级目录下。)<br>在command windows里面启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm fmri</span><br></pre></td></tr></table></figure></p>
-<p>之后，即可以通过spm的batch界面处理单个被试的静息态HRF去卷积分析；此时，可在command windows里面启动GUI：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsHRF</span><br></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm_rsHRF</span><br></pre></td></tr></table></figure></p>
-<p>或在spm界面上的toolbox下拉框内可见rsHRF，直接点击即可。<br><img src="/HRF/rsHRF_GUI.png" alt=""></p>
+<h2 id="PPT手册"><a href="#PPT手册" class="headerlink" title="PPT手册"></a>PPT手册</h2><p>在rsHRF的安装包里面带有rsHRF_toolbox.pptx的文件，该文件简单介绍了该插件的安装，使用方式，以及结果输出的解释。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>rsHRF提供两种安装方式：</p>
+<p>###代码安装<br>直接运行代码rsHRF_install_SPM.m，即可完成安装。</p>
+<p>在command windows里面启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsHRF_install_SPM</span><br></pre></td></tr></table></figure></p>
+<p>###手动安装<br>必须将rsHRF工具包解压后放置在 ./SPM/toolbox/ (请保证解压后有rsHRF.m文件的路径为: ./SPM/toolbox/rsHRF/rsHRF.m, 不能处于多级目录下。文件夹名字也请改为rsHRF)<br>在command windows里面启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm fmri</span><br></pre></td></tr></table></figure></p>
+<p>之后，即可以通过spm的batch界面处理单个被试的静息态HRF去卷积和连接分析；此时，可在command windows里面启动GUI：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsHRF</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spm_rsHRF</span><br></pre></td></tr></table></figure>
+<p>若要单独启动connectivity分析模块，则输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsHRF conn</span><br></pre></td></tr></table></figure>
+<p>或在spm界面上的toolbox下拉框内可见rsHRF，直接点击即可。</p>
+<p><img src="/HRF/rsHRF_GUI.png" alt=""></p>
+<p>点击相应的按钮(voxels/ROIs/Signals)可启动spm的batch界面，如果没有导入任何内容，则说明rsHRF未被正确安装。</p>
 <h2 id="示例job"><a href="#示例job" class="headerlink" title="示例job"></a>示例job</h2><p>在spm batch editor里面load batch (在工具包里面的demo_jobs里面带有多个batch文件可供选择)</p>
+<h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><p>数据下载地址如下：</p>
+<p>链接: <a href="https://pan.baidu.com/s/1nlz4hDKFDAY9eAW9lIqJiw" target="_blank" rel="noopener">https://pan.baidu.com/s/1nlz4hDKFDAY9eAW9lIqJiw</a><br>密码:66m2</p>
 <h3 id="体素水平上的分析-voxel-level-analysis"><a href="#体素水平上的分析-voxel-level-analysis" class="headerlink" title="体素水平上的分析(voxel-level analysis)"></a>体素水平上的分析(voxel-level analysis)</h3><blockquote>
 <p>个体空间上的静息态HRF估计及去卷积 (推荐!)</p>
 </blockquote>
@@ -226,7 +237,7 @@
 </blockquote>
 <p>直接选择这些信号文件（txt或者mat文件），加上一些可选的去噪步骤，即可执行HRF去卷积，输出的信号文件即可用于FC/GC的分析。</p>
 <p>关于Atlas或mask的说明：只需保证与fMRI数据是同一个空间上的(若在个体空间上，两者已做过了coregister; 若在MNI空间上，两者只要都是MNI空间上即可)，不需要保证体素大小相同，建议：atlas或mask文件的体素大小不要高于fMRI数据的体素大小。</p>
-<p>(针对rsHRF ver1.0)关于4D文件的说明：在选择preprocessed volumes时，如果是一个4D文件，它默认的选择(Frames为1)如下：<br><img src="/HRF/rsHRF_4D0.png" alt=""><br>这时如果只是选择该文件，意味着你只选择了一张图像，它无法自动去检测出剩下的时间点(即2:end的volumes)，我们需要在Frames里面填上1到该文件所含的总volume数（或者简单填上一个明显比volume数大的数字），即在frames栏填上1:k (比如1:5000)，这时该窗口立马变成如下情况，将对应的1到k的文件选择上即可(比如简单点击Done左边的Rec把所有文件选择上，因为此时待选择的文件就一个rest.nii文件)。<br><img src="/HRF/rsHRF_4D1.png" alt=""><br>对于rsHRF ver2.0，在选择preprocessed volumes时，可以只选择第一张图像(frame)，也支持选择所有frames。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>对于rsHRF ver2.0，在选择preprocessed volumes时，可以只选择第一张图像(frame)，也支持选择所有frames。但每次只能输入一个4D文件，即我们只提供单个被试的处理。如果需要批处理，可通过batch editor生成一个job文件/代码（File，Save Batch and Script），稍微更改和添加必要的变量，形成一个函数文件用于循环调用。<br>对rsHRF ver1.0， 在选择preprocessed volumes时，如果输入的是一个4D文件，它默认的选择(Frames为1)如下：<br><img src="/HRF/rsHRF_4D0.png" alt=""><br>这时如果只是选择该文件，意味着你只选择了一张图像，它无法自动去检测出剩下的时间点(即2:end的volumes)，我们需要在Frames里面填上1到该文件所含的总volume数（或者简单填上一个明显比volume数大的数字），即在frames栏填上1:k (比如1:5000)，这时该窗口立马变成如下情况，将对应的1到k的文件选择上即可(比如简单点击Done左边的Rec把所有文件选择上，因为此时待选择的文件就一个rest.nii文件)。<br><img src="/HRF/rsHRF_4D1.png" alt=""></p>
 
                 
 
