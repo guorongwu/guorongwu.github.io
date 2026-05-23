@@ -1,1152 +1,252 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>数字小镇：幼儿百数表启蒙</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      color: #1e293b;
-      background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 45%, #eff6ff 100%);
-    }
-
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .app {
-      min-height: 100vh;
-      padding: 18px;
-    }
-
-    .top-bar {
-      max-width: 1280px;
-      margin: 0 auto 16px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 22px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 32px;
-      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: #fef3c7;
-      color: #92400e;
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    h1 {
-      margin: 10px 0 8px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.08;
-    }
-
-    .top-bar p {
-      margin: 0;
-      color: #64748b;
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-    .status-panel {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      min-width: 190px;
-    }
-
-    .stars {
-      text-align: center;
-      font-size: 34px;
-      font-weight: 1000;
-      color: #f59e0b;
-      padding: 10px;
-      background: white;
-      border-radius: 24px;
-    }
-
-    .main-layout {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 16px;
-    }
-
-    .side-nav {
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .nav-item {
-      display: grid;
-      grid-template-columns: 48px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      text-align: left;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      background: rgba(255, 255, 255, 0.78);
-      border-radius: 26px;
-      padding: 13px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-    }
-
-    .nav-item.active {
-      background: white;
-      border-color: #fb923c;
-      box-shadow: 0 12px 30px rgba(251, 146, 60, 0.18);
-    }
-
-    .nav-icon {
-      height: 48px;
-      width: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      background: #f1f5f9;
-      font-size: 27px;
-    }
-
-    .nav-item strong {
-      display: block;
-      font-size: 16px;
-    }
-
-    .nav-item small {
-      display: block;
-      margin-top: 4px;
-      color: #64748b;
-      line-height: 1.35;
-    }
-
-    .nav-item em {
-      font-style: normal;
-      background: #dcfce7;
-      color: #166534;
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-weight: 900;
-    }
-
-    .stage-frame,
-    .parent-guide {
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
-    }
-
-    .stage-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: flex-start;
-      padding: 22px;
-      border-bottom: 1px solid #e2e8f0;
-      background: white;
-    }
-
-    .stage-header h2 {
-      margin: 0;
-      font-size: 30px;
-    }
-
-    .stage-header p {
-      margin: 6px 0 0;
-      color: #64748b;
-      line-height: 1.5;
-    }
-
-    .stage-body {
-      padding: 22px;
-    }
-
-    .primary-button,
-    .toggle-button {
-      border: 0;
-      border-radius: 22px;
-      padding: 14px 18px;
-      font-weight: 900;
-      font-size: 16px;
-      background: #fb923c;
-      color: white;
-      box-shadow: 0 8px 20px rgba(251, 146, 60, 0.22);
-    }
-
-    .small-button {
-      white-space: nowrap;
-      font-size: 15px;
-      padding: 12px 15px;
-    }
-
-    .toggle-button {
-      background: white;
-      color: #475569;
-      border: 2px solid #e2e8f0;
-      box-shadow: none;
-    }
-
-    .toggle-button.active {
-      background: #fb923c;
-      color: white;
-      border-color: #fb923c;
-    }
-
-    .prompt {
-      display: grid;
-      grid-template-columns: auto auto 1fr;
-      gap: 20px;
-      align-items: center;
-      border: 5px solid;
-      border-radius: 32px;
-      padding: 18px;
-      margin-bottom: 20px;
-    }
-
-    .prompt-emoji {
-      font-size: 64px;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-
-    .target-number {
-      min-width: 120px;
-      min-height: 110px;
-      border: 0;
-      border-radius: 30px;
-      background: white;
-      font-size: 74px;
-      font-weight: 1000;
-      line-height: 1;
-    }
-
-    .prompt-right {
-      display: grid;
-      gap: 8px;
-      align-content: center;
-    }
-
-    .kid-rule {
-      font-weight: 900;
-      color: #334155;
-    }
-
-    .adult-hint {
-      color: #64748b;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .object-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(80px, 1fr));
-      gap: 14px;
-      padding: 20px;
-      border-radius: 32px;
-      min-height: 230px;
-    }
-
-    .object-button {
-      min-height: 100px;
-      border: 5px solid transparent;
-      border-radius: 30px;
-      background: white;
-      font-size: 58px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-      transition: 0.15s;
-    }
-
-    .counter-card {
-      margin-top: 15px;
-      background: white;
-      border-radius: 28px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-    }
-
-    .counter-card div {
-      color: #64748b;
-      font-weight: 800;
-    }
-
-    .counter-card strong {
-      display: block;
-      font-size: 72px;
-      line-height: 1;
-      margin-top: 4px;
-    }
-
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .compact-choices {
-      margin-top: 18px;
-    }
-
-    .number-choice {
-      min-height: 118px;
-      border: 5px solid transparent;
-      border-radius: 30px;
-      font-size: 62px;
-      font-weight: 1000;
-      transition: 0.15s;
-    }
-
-    .number-choice:hover,
-    .object-button:hover,
-    .grid-cell:hover {
-      transform: translateY(-2px);
-    }
-
-    .feedback {
-      margin-top: 18px;
-      border-radius: 28px;
-      padding: 18px;
-      font-size: 26px;
-      font-weight: 1000;
-    }
-
-    .feedback.good {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .feedback.hint {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .train-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
-      padding: 18px;
-      background: #f5f3ff;
-      border-radius: 32px;
-    }
-
-    .train-car {
-      min-height: 112px;
-      display: grid;
-      place-items: center;
-      border: 5px dashed transparent;
-      border-radius: 28px;
-      background: white;
-      font-size: 45px;
-      font-weight: 1000;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-    }
-
-    .box-area {
-      border-radius: 32px;
-      padding: 20px;
-    }
-
-    .boxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .ten-box {
-      background: white;
-      border-radius: 24px;
-      padding: 12px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-    }
-
-    .box-label {
-      font-weight: 1000;
-      color: #475569;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .dot-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 18px);
-      gap: 5px;
-    }
-
-    .dot-grid span {
-      height: 18px;
-      border-radius: 6px;
-    }
-
-    .loose-area {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-      min-height: 54px;
-      align-items: center;
-    }
-
-    .loose-dot {
-      height: 42px;
-      width: 42px;
-      border-radius: 14px;
-      background: white;
-      border: 4px solid;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-    }
-
-    .zero-loose {
-      background: white;
-      padding: 12px 20px;
-      border-radius: 18px;
-      color: #64748b;
-      font-weight: 1000;
-    }
-
-    .limit-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .hundred-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 6px;
-      padding: 14px;
-      background: #f8fafc;
-      border-radius: 28px;
-    }
-
-    .grid-cell {
-      aspect-ratio: 1 / 1;
-      border: 3px solid transparent;
-      border-radius: 14px;
-      font-size: clamp(12px, 1.55vw, 20px);
-      font-weight: 1000;
-      box-shadow: 0 5px 10px rgba(15, 23, 42, 0.04);
-    }
-
-    .parent-guide {
-      margin-top: 16px;
-      padding: 22px;
-    }
-
-    .parent-guide h3 {
-      margin: 0 0 14px;
-      font-size: 23px;
-    }
-
-    .guide-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .guide-grid div {
-      padding: 16px;
-      border-radius: 24px;
-      background: #f8fafc;
-    }
-
-    .guide-grid strong {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .guide-grid p,
-    .settings-text {
-      margin: 0;
-      color: #64748b;
-      line-height: 1.55;
-    }
-
-    .settings-text {
-      margin-top: 12px;
-      padding: 13px;
-      background: #fff7ed;
-      border-radius: 20px;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    @media (max-width: 920px) {
-      .top-bar,
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .side-nav {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .prompt {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .prompt-right {
-        justify-items: center;
-      }
-
-      .choice-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .guide-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .app { padding: 10px; }
-
-      .top-bar,
-      .stage-body,
-      .stage-header,
-      .parent-guide {
-        padding: 14px;
-      }
-
-      .side-nav {
-        grid-template-columns: 1fr;
-      }
-
-      .object-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .object-button {
-        min-height: 82px;
-        font-size: 46px;
-      }
-
-      .number-choice {
-        min-height: 95px;
-        font-size: 48px;
-      }
-
-      .train-row {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        padding: 10px;
-      }
-
-      .train-car {
-        min-height: 72px;
-        font-size: 30px;
-        border-radius: 18px;
-      }
-
-      .hundred-grid {
-        gap: 3px;
-        padding: 8px;
-      }
-
-      .grid-cell {
-        border-radius: 8px;
-        font-size: 11px;
-      }
-
-      .target-number {
-        min-width: 100px;
-        min-height: 96px;
-        font-size: 62px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>数字小镇：稳定中文发音版</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fff7ed,#eff6ff);color:#1e293b}
+button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:1220px;margin:0 auto;padding:16px}
+.header{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;background:rgba(255,255,255,.92);border-radius:30px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
+.badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:7px 12px;font-weight:900}
+h1{margin:10px 0 8px;font-size:clamp(28px,4.5vw,48px);line-height:1.08}
+p{line-height:1.6}
+.header p{margin:0;color:#64748b}
+.controls{display:grid;gap:10px;min-width:210px}
+.score{background:white;border-radius:22px;padding:10px;text-align:center;font-size:32px;font-weight:1000;color:#f59e0b}
+.btn,.toggle{border:0;border-radius:22px;padding:13px 16px;font-size:16px;font-weight:900;background:#fb923c;color:white;box-shadow:0 8px 18px rgba(251,146,60,.22)}
+.toggle{background:white;color:#475569;border:2px solid #e2e8f0;box-shadow:none}
+.toggle.on{background:#fb923c;color:white;border-color:#fb923c}
+.note{font-size:12px;color:#64748b;text-align:center;line-height:1.35}
+.layout{display:grid;grid-template-columns:285px 1fr;gap:16px;margin-top:16px}
+.nav{display:grid;gap:10px;align-content:start}
+.nav button{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;text-align:left;border:2px solid rgba(255,255,255,.8);background:rgba(255,255,255,.82);border-radius:25px;padding:13px;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+.nav button.active{border-color:#fb923c;background:white;box-shadow:0 12px 30px rgba(251,146,60,.18)}
+.ico{height:48px;width:48px;display:grid;place-items:center;border-radius:18px;background:#f1f5f9;font-size:27px}
+.nav strong{display:block}
+.nav small{display:block;color:#64748b;margin-top:4px;line-height:1.35}
+.done{font-style:normal;background:#dcfce7;color:#166534;border-radius:999px;padding:3px 8px;font-weight:900}
+.card,.guide{background:rgba(255,255,255,.94);border-radius:32px;box-shadow:0 12px 35px rgba(15,23,42,.08);overflow:hidden}
+.cardHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:white;border-bottom:1px solid #e2e8f0;padding:22px}
+.cardHead h2{margin:0;font-size:30px}
+.cardHead p{margin:6px 0 0;color:#64748b}
+.body{padding:22px}
+.prompt{display:grid;grid-template-columns:auto auto 1fr;gap:20px;align-items:center;border:5px solid;border-radius:32px;padding:18px;margin-bottom:20px}
+.emoji{font-size:64px;animation:pulse 1.8s ease-in-out infinite}
+.target{min-width:120px;min-height:110px;border:0;border-radius:30px;background:white;font-size:74px;font-weight:1000;line-height:1}
+.rule{font-weight:1000;color:#334155;margin-top:8px}
+.adult{color:#64748b;font-size:14px;margin-top:5px}
+.choiceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.choice{min-height:118px;border:5px solid transparent;border-radius:30px;background:white;font-size:62px;font-weight:1000;box-shadow:0 10px 25px rgba(15,23,42,.08);transition:.15s}
+.choice:hover,.obj:hover,.cell:hover{transform:translateY(-2px)}
+.objectGrid{display:grid;grid-template-columns:repeat(5,minmax(80px,1fr));gap:14px;padding:20px;border-radius:32px;min-height:230px}
+.obj{min-height:100px;border:5px solid transparent;border-radius:30px;background:white;font-size:58px;box-shadow:0 8px 18px rgba(15,23,42,.08);transition:.15s}
+.counter{margin-top:15px;background:white;border-radius:28px;padding:16px;text-align:center;box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.counter div{color:#64748b;font-weight:800}
+.counter strong{display:block;font-size:72px;line-height:1;margin-top:4px}
+.feedback{margin-top:18px;border-radius:28px;padding:18px;font-size:26px;font-weight:1000}
+.good{background:#dcfce7;color:#166534}
+.hint{background:#dbeafe;color:#1d4ed8}
+.train{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;padding:18px;background:#f5f3ff;border-radius:32px}
+.car{min-height:112px;display:grid;place-items:center;border:5px dashed transparent;border-radius:28px;background:white;font-size:45px;font-weight:1000;box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.boxArea{border-radius:32px;padding:20px;margin-bottom:18px}
+.boxes{display:flex;flex-wrap:wrap;gap:16px}
+.tenBox{background:white;border-radius:24px;padding:12px;box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.boxLabel{text-align:center;font-weight:1000;color:#475569;margin-bottom:8px}
+.dots{display:grid;grid-template-columns:repeat(5,18px);gap:5px}
+.dots span{height:18px;border-radius:6px}
+.loose{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;min-height:54px;align-items:center}
+.loose span{height:42px;width:42px;border-radius:14px;background:white;border:4px solid;box-shadow:0 8px 18px rgba(15,23,42,.06)}
+.limitBtns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.hundred{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;padding:14px;background:#f8fafc;border-radius:28px}
+.cell{aspect-ratio:1/1;border:3px solid transparent;border-radius:14px;font-size:clamp(12px,1.55vw,20px);font-weight:1000;box-shadow:0 5px 10px rgba(15,23,42,.04)}
+.guide{margin-top:16px;padding:22px}
+.guide h3{margin:0 0 14px;font-size:23px}
+.guideGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.guideGrid div{padding:16px;border-radius:24px;background:#f8fafc}
+.guideGrid strong{display:block;margin-bottom:8px}
+.guideGrid p{margin:0;color:#64748b}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@media(max-width:920px){.header,.layout{grid-template-columns:1fr}.nav{grid-template-columns:repeat(2,1fr)}.prompt{grid-template-columns:1fr;text-align:center}.choiceGrid{grid-template-columns:repeat(2,1fr)}.guideGrid{grid-template-columns:1fr}}
+@media(max-width:620px){.app{padding:10px}.cardHead,.body,.guide,.header{padding:14px}.nav{grid-template-columns:1fr}.objectGrid{grid-template-columns:repeat(3,1fr)}.obj{min-height:82px;font-size:46px}.choice{min-height:95px;font-size:48px}.car{min-height:72px;font-size:30px;border-radius:18px}.train{gap:6px;padding:10px}.hundred{gap:3px;padding:8px}.cell{border-radius:8px;font-size:11px}.target{min-width:100px;min-height:96px;font-size:62px}}
+</style>
 </head>
 <body>
-  <div class="app">
-    <header class="top-bar">
-      <div>
-        <div class="badge">✨ 数字小镇：不识字幼儿实验版</div>
-        <h1>听声音，看颜色，点大数字</h1>
-        <p>孩子不需要读文字。每一题都可以发音，目标数字会变大、变彩色。</p>
-      </div>
-      <div class="status-panel">
-        <div class="stars" id="stars">🏆 0</div>
-        <button class="toggle-button active" id="autoSpeakButton">🔊 自动发音</button>
-        <button class="toggle-button active" id="colorHelpButton">🎨 颜色帮忙</button>
-      </div>
-    </header>
-
-    <div class="main-layout">
-      <nav class="side-nav" id="sideNav"></nav>
-      <main>
-        <section class="stage-frame">
-          <div class="stage-header">
-            <div>
-              <h2 id="stageTitle">点一点，数一数</h2>
-              <p id="stageSubtitle">孩子不识字也能玩。</p>
-            </div>
-            <button class="primary-button small-button" id="newQuestionButton">🔄 换一题</button>
-          </div>
-          <div class="stage-body" id="stageBody"></div>
-        </section>
-
-        <section class="parent-guide">
-          <h3>成人实验方式</h3>
-          <div class="guide-grid">
-            <div>
-              <strong>第一轮：打开颜色帮忙</strong>
-              <p>先让孩子学会配合程序：听声音、看颜色、点同色目标。</p>
-            </div>
-            <div>
-              <strong>第二轮：关闭颜色帮忙</strong>
-              <p>她懂玩法后，再观察是否能靠声音和数字形状寻找。</p>
-            </div>
-            <div>
-              <strong>每次 5–8 分钟</strong>
-              <p>错了不要说“错了”，点“听一听”，让她重新找。</p>
-            </div>
-          </div>
-          <p class="settings-text" id="settingsText">当前：自动发音开；颜色帮忙开。</p>
-        </section>
-      </main>
+<div class="app">
+  <header class="header">
+    <div>
+      <div class="badge">✨ 数字小镇：稳定版</div>
+      <h1>听中文，看颜色，点大数字</h1>
+      <p>这个版本不再等待“加载中文声音”。Windows 正常中文时保持原方式；Mac 如果系统语音不兼容，程序也不会卡住。</p>
     </div>
+    <div class="controls">
+      <div id="score" class="score">🏆 0</div>
+      <button id="testVoice" class="btn">🔈 测试发音</button>
+      <button id="autoBtn" class="toggle on">🔊 自动发音</button>
+      <button id="colorBtn" class="toggle on">🎨 颜色帮忙</button>
+      <div class="note">语音由浏览器/系统提供；Mac 若读英文，需换 Safari 或安装/选择中文系统语音。</div>
+    </div>
+  </header>
+  <div class="layout">
+    <nav id="nav" class="nav"></nav>
+    <main>
+      <section class="card">
+        <div class="cardHead">
+          <div><h2 id="title"></h2><p id="subtitle"></p></div>
+          <button id="newQ" class="btn">🔄 换一题</button>
+        </div>
+        <div id="body" class="body"></div>
+      </section>
+      <section class="guide">
+        <h3>成人实验方式</h3>
+        <div class="guideGrid">
+          <div><strong>第一轮</strong><p>打开颜色帮忙，让孩子先学会听声音、看颜色、点目标。</p></div>
+          <div><strong>第二轮</strong><p>关闭颜色帮忙，观察她是否能靠声音和数字形状寻找。</p></div>
+          <div><strong>跳一跳</strong><p>现在只高亮起点，不高亮答案。孩子需要自己根据方向找终点。</p></div>
+        </div>
+      </section>
+    </main>
   </div>
+</div>
 
-  <script>
-    const COLORS = [
-      { name: "红色", bg: "#fee2e2", fg: "#b91c1c", solid: "#ef4444", light: "#fecaca" },
-      { name: "黄色", bg: "#fef3c7", fg: "#92400e", solid: "#f59e0b", light: "#fde68a" },
-      { name: "蓝色", bg: "#dbeafe", fg: "#1d4ed8", solid: "#3b82f6", light: "#bfdbfe" },
-      { name: "绿色", bg: "#dcfce7", fg: "#166534", solid: "#22c55e", light: "#bbf7d0" },
-      { name: "紫色", bg: "#ede9fe", fg: "#6d28d9", solid: "#8b5cf6", light: "#ddd6fe" },
-      { name: "粉色", bg: "#fce7f3", fg: "#be185d", solid: "#ec4899", light: "#fbcfe8" }
-    ];
-
-    const STAGES = [
-      { id: "count", icon: "👆", title: "点一点", subtitle: "点彩色图案，听数字" },
-      { id: "find", icon: "👂", title: "找数字", subtitle: "听数字，找同色大数字" },
-      { id: "train", icon: "🚂", title: "数字火车", subtitle: "找少掉的车厢" },
-      { id: "box", icon: "📦", title: "十个一盒", subtitle: "看盒子，找总数" },
-      { id: "grid", icon: "🗺️", title: "小百数表", subtitle: "在地图里找数字" },
-      { id: "jump", icon: "🐰", title: "跳一跳", subtitle: "右边加1，下面加10" }
-    ];
-
-    const PRAISE = ["太棒了！", "你找到了！", "做得很好！", "真厉害！", "我们继续玩！"];
-    const HINTS = ["没关系，再听一次。", "我们慢慢找。", "差一点点。", "再看一看颜色。"];
-
-    const state = {
-      activeStage: "count",
-      stars: Number(localStorage.getItem("numberTownStars") || 0),
-      completed: JSON.parse(localStorage.getItem("numberTownCompleted") || "{}"),
-      autoSpeak: localStorage.getItem("numberTownAutoSpeak") !== "false",
-      colorHelp: localStorage.getItem("numberTownColorHelp") !== "false",
-      current: {}
-    };
-
-    const sideNav = document.getElementById("sideNav");
-    const stageTitle = document.getElementById("stageTitle");
-    const stageSubtitle = document.getElementById("stageSubtitle");
-    const stageBody = document.getElementById("stageBody");
-    const newQuestionButton = document.getElementById("newQuestionButton");
-    const stars = document.getElementById("stars");
-    const autoSpeakButton = document.getElementById("autoSpeakButton");
-    const colorHelpButton = document.getElementById("colorHelpButton");
-    const settingsText = document.getElementById("settingsText");
-
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function shuffle(array) {
-      return array.slice().sort(() => Math.random() - 0.5);
-    }
-
-    function clamp(n, min, max) {
-      return Math.max(min, Math.min(max, n));
-    }
-
-    function colorFor(n) {
-      return COLORS[Math.abs(n) % COLORS.length];
-    }
-
-    function pick(array) {
-      return array[randomInt(0, array.length - 1)];
-    }
-
-    function speak(text) {
-      if (!window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = "zh-CN";
-      utter.rate = 0.78;
-      utter.pitch = 1.12;
-      window.speechSynthesis.speak(utter);
-    }
-
-    function autoSpeak(text) {
-      if (!state.autoSpeak) return;
-      setTimeout(() => speak(text), 250);
-    }
-
-    function saveState() {
-      localStorage.setItem("numberTownStars", String(state.stars));
-      localStorage.setItem("numberTownCompleted", JSON.stringify(state.completed));
-      localStorage.setItem("numberTownAutoSpeak", String(state.autoSpeak));
-      localStorage.setItem("numberTownColorHelp", String(state.colorHelp));
-    }
-
-    function award(stageId) {
-      state.stars += 1;
-      state.completed[stageId] = true;
-      saveState();
-      updateTop();
-      renderNav();
-    }
-
-    function updateTop() {
-      stars.textContent = "🏆 " + state.stars;
-      autoSpeakButton.classList.toggle("active", state.autoSpeak);
-      colorHelpButton.classList.toggle("active", state.colorHelp);
-      settingsText.textContent = `当前：${state.autoSpeak ? "自动发音开" : "自动发音关"}；${state.colorHelp ? "颜色帮忙开" : "颜色帮忙关"}。`;
-    }
-
-    function renderNav() {
-      sideNav.innerHTML = "";
-      STAGES.forEach(stage => {
-        const button = document.createElement("button");
-        button.className = "nav-item" + (state.activeStage === stage.id ? " active" : "");
-        button.innerHTML = `
-          <span class="nav-icon">${stage.icon}</span>
-          <span><strong>${stage.title}</strong><small>${stage.subtitle}</small></span>
-          ${state.completed[stage.id] ? "<em>✓</em>" : ""}
-        `;
-        button.addEventListener("click", () => {
-          state.activeStage = stage.id;
-          speak(stage.subtitle);
-          render();
-        });
-        sideNav.appendChild(button);
-      });
-    }
-
-    function setHeader(title, subtitle) {
-      stageTitle.textContent = title;
-      stageSubtitle.textContent = subtitle;
-    }
-
-    function makeChoices(answer, min, max, count = 4, spread = 4) {
-      const set = new Set([answer]);
-      while (set.size < count) {
-        set.add(clamp(answer + randomInt(-spread, spread), min, max));
-      }
-      return shuffle(Array.from(set));
-    }
-
-    function promptCard({ emoji, text, number, color, helper }) {
-      const numberHtml = number === undefined ? "" : `
-        <button class="target-number" id="targetNumberButton" style="color:${color.fg}; box-shadow:0 0 0 7px ${color.light};">${number}</button>
-      `;
-      return `
-        <div class="prompt" style="background:${color.bg}; border-color:${color.solid};">
-          <div class="prompt-emoji">${emoji}</div>
-          ${numberHtml}
-          <div class="prompt-right">
-            <button class="primary-button" id="listenButton">🔊 听一听</button>
-            <div class="kid-rule">孩子只需要：听声音 → 看颜色 → 点大按钮</div>
-            ${helper ? `<div class="adult-hint">大人提示：${helper}</div>` : ""}
-          </div>
-        </div>
-      `;
-    }
-
-    function bindPrompt(text, number) {
-      const listenButton = document.getElementById("listenButton");
-      if (listenButton) listenButton.addEventListener("click", () => speak(text));
-      const targetButton = document.getElementById("targetNumberButton");
-      if (targetButton && number !== undefined) targetButton.addEventListener("click", () => speak("这是 " + number));
-    }
-
-    function feedbackHtml(feedback) {
-      if (!feedback) return "";
-      return `<div class="feedback ${feedback.good ? "good" : "hint"}">${feedback.text}</div>`;
-    }
-
-    function choiceButtonHtml(n, color, highlighted) {
-      const shadow = highlighted ? `0 0 0 7px ${color.light}` : "0 10px 25px rgba(15, 23, 42, 0.08)";
-      return `<button class="number-choice" data-number="${n}" style="color:${color.fg}; background:white; border-color:${highlighted ? color.solid : "transparent"}; box-shadow:${shadow};">${n}</button>`;
-    }
-
-    function bindChoiceButtons(handler) {
-      document.querySelectorAll(".number-choice").forEach(button => {
-        button.addEventListener("click", () => {
-          const n = Number(button.dataset.number);
-          speak("我点了 " + n);
-          handler(n);
-        });
-      });
-    }
-
-    function showFeedback(feedback) {
-      const old = document.getElementById("feedbackMount");
-      if (old) old.outerHTML = `<div id="feedbackMount">${feedbackHtml(feedback)}</div>`;
-    }
-
-    function renderCountGame(newQuestion = true) {
-      setHeader("点一点，数一数", "孩子不识字也能玩：只要点彩色图案，程序会发音数数。");
-      if (newQuestion || !state.current.count) {
-        state.current.count = { target: randomInt(1, 7), clicked: [] };
-      }
-      const game = state.current.count;
-      const color = colorFor(game.target);
-      const icons = ["🍎", "🍌", "🍓", "🧸", "🐥", "🌸", "⭐"];
-      const icon = icons[game.target % icons.length];
-      const prompt = `请点${color.name}的小图案。点一个，听一个数字。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "👆", text: prompt, color, helper: "先不要求孩子认数字，目标是建立“一个一个点、一个一个数”。" })}
-        <div class="object-grid" style="background:${color.bg};">
-          ${Array.from({ length: game.target }, (_, index) => {
-            const active = game.clicked.includes(index);
-            return `<button class="object-button" data-index="${index}" style="border-color:${active ? color.solid : "transparent"}; transform:${active ? "scale(1.06)" : "scale(1)"};">${icon}</button>`;
-          }).join("")}
-        </div>
-        <div class="counter-card"><div>刚刚点了</div><strong style="color:${color.fg};">${game.clicked.length}</strong></div>
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt);
-      document.querySelectorAll(".object-button").forEach(button => {
-        button.addEventListener("click", () => {
-          const index = Number(button.dataset.index);
-          if (game.clicked.includes(index)) return;
-          game.clicked.push(index);
-          speak(String(game.clicked.length));
-          renderCountGame(false);
-          if (game.clicked.length === game.target) {
-            const text = `${pick(PRAISE)} 一共有 ${game.target} 个。`;
-            showFeedback({ good: true, text });
-            setTimeout(() => speak(text), 500);
-            award("count");
-          }
-        });
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function renderFindNumberGame(newQuestion = true) {
-      setHeader("听声音，找数字", "先让孩子按照声音和颜色找，不要求她读文字。");
-      if (newQuestion || !state.current.find) {
-        const target = randomInt(1, 10);
-        state.current.find = { target, choices: makeChoices(target, 1, 10, 4, 3) };
-      }
-      const game = state.current.find;
-      const color = colorFor(game.target);
-      const prompt = state.colorHelp ? `请找 ${game.target}。它和大卡片一样，是${color.name}。` : `请找 ${game.target}。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "👂", text: prompt, number: game.target, color, helper: "颜色帮忙开着时，正确答案和目标卡片同色；熟悉后可关闭颜色帮忙。" })}
-        <div class="choice-grid">
-          ${game.choices.map(n => {
-            const c = state.colorHelp && n === game.target ? color : colorFor(n + 2);
-            return choiceButtonHtml(n, c, state.colorHelp && n === game.target);
-          }).join("")}
-        </div>
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt, game.target);
-      bindChoiceButtons(n => {
-        if (n === game.target) {
-          const text = `${pick(PRAISE)} 这是 ${game.target}。`;
-          showFeedback({ good: true, text });
-          setTimeout(() => speak(text), 350);
-          award("find");
-        } else {
-          const text = `${pick(HINTS)} 再找 ${game.target}。`;
-          showFeedback({ good: false, text });
-          setTimeout(() => speak(text), 350);
-        }
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function renderTrainGame(newQuestion = true) {
-      setHeader("数字火车", "练习数字顺序：前面是谁，后面是谁。");
-      if (newQuestion || !state.current.train) {
-        const start = randomInt(1, 14);
-        const blankIndex = randomInt(1, 3);
-        const train = Array.from({ length: 5 }, (_, i) => start + i);
-        const answer = train[blankIndex];
-        state.current.train = { start, blankIndex, train, answer, choices: makeChoices(answer, 1, 20, 4, 3) };
-      }
-      const game = state.current.train;
-      const color = colorFor(game.answer);
-      const prompt = `数字火车少了一节。${game.train[game.blankIndex - 1]} 后面是谁？请找 ${game.answer}。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "🚂", text: prompt, number: game.answer, color, helper: "先用声音和颜色找答案，不急着说“加一”。" })}
-        <div class="train-row">
-          ${game.train.map((n, i) => {
-            const isBlank = i === game.blankIndex;
-            return `<div class="train-car" style="border-color:${isBlank ? color.solid : "transparent"}; color:${isBlank ? color.fg : "#1e293b"};">${isBlank ? "?" : n}</div>`;
-          }).join("")}
-        </div>
-        <div class="choice-grid">
-          ${game.choices.map(n => {
-            const c = state.colorHelp && n === game.answer ? color : colorFor(n + 3);
-            return choiceButtonHtml(n, c, state.colorHelp && n === game.answer);
-          }).join("")}
-        </div>
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt, game.answer);
-      bindChoiceButtons(n => {
-        if (n === game.answer) {
-          const text = `${pick(PRAISE)} ${game.answer} 坐上了车厢。`;
-          showFeedback({ good: true, text });
-          setTimeout(() => speak(text), 350);
-          award("train");
-        } else {
-          const text = `${pick(HINTS)} 再听一次，找 ${game.answer}。`;
-          showFeedback({ good: false, text });
-          setTimeout(() => speak(text), 350);
-        }
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function renderBoxGame(newQuestion = true) {
-      setHeader("十个装一盒", "不用讲个位十位，先让孩子看见：10 个是一盒。");
-      if (newQuestion || !state.current.box) {
-        const target = randomInt(10, 30);
-        state.current.box = { target, choices: makeChoices(target, 10, 30, 4, 4) };
-      }
-      const game = state.current.box;
-      const tens = Math.floor(game.target / 10);
-      const ones = game.target % 10;
-      const color = colorFor(game.target);
-      const prompt = `一盒是 10 个。这里有 ${tens} 盒，还有 ${ones} 个。请找总数 ${game.target}。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "📦", text: prompt, number: game.target, color, helper: "这里用“一盒10个”替代“十位”，孩子更容易理解。" })}
-        <div class="box-area" style="background:${color.bg};">
-          <div class="boxes">
-            ${Array.from({ length: tens }, () => `
-              <div class="ten-box">
-                <div class="box-label">10</div>
-                <div class="dot-grid">
-                  ${Array.from({ length: 10 }, () => `<span style="background:${color.solid};"></span>`).join("")}
-                </div>
-              </div>
-            `).join("")}
-          </div>
-          <div class="loose-area">
-            ${ones === 0 ? `<div class="zero-loose">0</div>` : Array.from({ length: ones }, () => `<span class="loose-dot" style="border-color:${color.solid};"></span>`).join("")}
-          </div>
-        </div>
-        <div class="choice-grid compact-choices">
-          ${game.choices.map(n => {
-            const c = state.colorHelp && n === game.target ? color : colorFor(n + 4);
-            return choiceButtonHtml(n, c, state.colorHelp && n === game.target);
-          }).join("")}
-        </div>
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt, game.target);
-      bindChoiceButtons(n => {
-        if (n === game.target) {
-          const text = `${pick(PRAISE)} ${tens} 盒，再加 ${ones} 个，是 ${game.target}。`;
-          showFeedback({ good: true, text });
-          setTimeout(() => speak(text), 350);
-          award("box");
-        } else {
-          const text = `${pick(HINTS)} 看盒子，再找 ${game.target}。`;
-          showFeedback({ good: false, text });
-          setTimeout(() => speak(text), 350);
-        }
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function hundredGridHtml({ limit, target, highlights = [] }) {
-      return `
-        <div class="hundred-grid">
-          ${Array.from({ length: 100 }, (_, i) => {
-            const n = i + 1;
-            const enabled = n <= limit;
-            const color = colorFor(n);
-            let style = "";
-            if (!enabled) {
-              style = "visibility:hidden;";
-            } else if (n === target && state.colorHelp) {
-              style = `background:${color.solid}; color:white; box-shadow:0 0 0 4px ${color.light};`;
-            } else if (highlights.includes(n)) {
-              style = `background:${color.bg}; color:${color.fg}; border-color:${color.solid};`;
-            } else {
-              style = `background:white; color:${color.fg};`;
-            }
-            return `<button class="grid-cell" data-number="${n}" style="${style}" ${enabled ? "" : "disabled"}>${enabled ? n : ""}</button>`;
-          }).join("")}
-        </div>
-      `;
-    }
-
-    function bindGridCells(handler) {
-      document.querySelectorAll(".grid-cell").forEach(button => {
-        if (button.disabled) return;
-        button.addEventListener("click", () => {
-          const n = Number(button.dataset.number);
-          speak("我点了 " + n);
-          handler(n);
-        });
-      });
-    }
-
-    function renderGridGame(newQuestion = true, newLimit) {
-      setHeader("小百数表", "完整百数表不是起点。先开放 1–20，再慢慢到 100。");
-      if (newQuestion || !state.current.grid) {
-        const limit = newLimit || (state.current.grid && state.current.grid.limit) || 20;
-        const target = randomInt(1, limit);
-        state.current.grid = { limit, target };
-      }
-      if (newLimit) {
-        state.current.grid.limit = newLimit;
-        state.current.grid.target = randomInt(1, newLimit);
-      }
-      const game = state.current.grid;
-      const color = colorFor(game.target);
-      const prompt = `请在数字地图里找到 ${game.target}。它现在是${color.name}的大数字。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "🗺️", text: prompt, number: game.target, color, helper: "孩子只要听目标数字，然后在地图上点它。" })}
-        <div class="limit-buttons">
-          ${[20, 50, 100].map(n => `<button class="toggle-button ${game.limit === n ? "active" : ""}" data-limit="${n}">练 1–${n}</button>`).join("")}
-        </div>
-        ${hundredGridHtml({ limit: game.limit, target: game.target })}
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt, game.target);
-      document.querySelectorAll("[data-limit]").forEach(button => {
-        button.addEventListener("click", () => renderGridGame(true, Number(button.dataset.limit)));
-      });
-      bindGridCells(n => {
-        if (n === game.target) {
-          const text = `${pick(PRAISE)} 找到了 ${game.target}。`;
-          showFeedback({ good: true, text });
-          setTimeout(() => speak(text), 350);
-          award("grid");
-        } else {
-          const text = `${pick(HINTS)} 再听一次，找 ${game.target}。`;
-          showFeedback({ good: false, text });
-          setTimeout(() => speak(text), 350);
-        }
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function makeJumpTask() {
-      const directions = [
-        { label: "往右走一格", delta: 1, hint: "往右走，数字多 1" },
-        { label: "往左走一格", delta: -1, hint: "往左走，数字少 1" },
-        { label: "往下跳一格", delta: 10, hint: "往下跳，数字多 10" },
-        { label: "往上跳一格", delta: -10, hint: "往上跳，数字少 10" }
-      ];
-      const tasks = [];
-      for (let start = 1; start <= 100; start++) {
-        directions.forEach(dir => {
-          const dest = start + dir.delta;
-          if (dest < 1 || dest > 100) return;
-          if (dir.delta === 1 && start % 10 === 0) return;
-          if (dir.delta === -1 && start % 10 === 1) return;
-          tasks.push({ start, dest, dir });
-        });
-      }
-      return pick(tasks);
-    }
-
-    function renderJumpGame(newQuestion = true) {
-      setHeader("百数表跳一跳", "用小兔子移动，感受往右 +1、往下 +10。");
-      if (newQuestion || !state.current.jump) {
-        state.current.jump = makeJumpTask();
-      }
-      const game = state.current.jump;
-      const color = colorFor(game.start);
-      const prompt = `小兔子在 ${game.start}。请让小兔子 ${game.dir.label}。`;
-
-      stageBody.innerHTML = `
-        ${promptCard({ emoji: "🐰", text: prompt, number: game.start, color, helper: "起点会发亮。孩子听方向后，点小兔子要跳到的位置。" })}
-        ${hundredGridHtml({ limit: 100, target: game.start, highlights: [game.start, game.dest] })}
-        <div id="feedbackMount"></div>
-      `;
-
-      bindPrompt(prompt, game.start);
-      bindGridCells(n => {
-        if (n === game.dest) {
-          const text = `${pick(PRAISE)} 从 ${game.start} ${game.dir.label}，到了 ${game.dest}。`;
-          showFeedback({ good: true, text });
-          setTimeout(() => speak(text), 350);
-          award("jump");
-        } else {
-          const text = `${pick(HINTS)} ${game.dir.hint}。`;
-          showFeedback({ good: false, text });
-          setTimeout(() => speak(text), 350);
-        }
-      });
-
-      autoSpeak(prompt);
-    }
-
-    function renderStage(newQuestion = true) {
-      if (state.activeStage === "count") renderCountGame(newQuestion);
-      else if (state.activeStage === "find") renderFindNumberGame(newQuestion);
-      else if (state.activeStage === "train") renderTrainGame(newQuestion);
-      else if (state.activeStage === "box") renderBoxGame(newQuestion);
-      else if (state.activeStage === "grid") renderGridGame(newQuestion);
-      else renderJumpGame(newQuestion);
-    }
-
-    function render() {
-      saveState();
-      updateTop();
-      renderNav();
-      renderStage(true);
-    }
-
-    newQuestionButton.addEventListener("click", () => renderStage(true));
-    autoSpeakButton.addEventListener("click", () => {
-      state.autoSpeak = !state.autoSpeak;
-      saveState();
-      updateTop();
-    });
-    colorHelpButton.addEventListener("click", () => {
-      state.colorHelp = !state.colorHelp;
-      saveState();
-      updateTop();
-      renderStage(false);
-    });
-
-    render();
-  </script>
+<script>
+const COLORS=[
+  {name:"红色",bg:"#fee2e2",fg:"#b91c1c",solid:"#ef4444",light:"#fecaca"},
+  {name:"黄色",bg:"#fef3c7",fg:"#92400e",solid:"#f59e0b",light:"#fde68a"},
+  {name:"蓝色",bg:"#dbeafe",fg:"#1d4ed8",solid:"#3b82f6",light:"#bfdbfe"},
+  {name:"绿色",bg:"#dcfce7",fg:"#166534",solid:"#22c55e",light:"#bbf7d0"},
+  {name:"紫色",bg:"#ede9fe",fg:"#6d28d9",solid:"#8b5cf6",light:"#ddd6fe"},
+  {name:"粉色",bg:"#fce7f3",fg:"#be185d",solid:"#ec4899",light:"#fbcfe8"}
+];
+const STAGES=[
+  {id:"count",icon:"👆",title:"点一点",sub:"点彩色图案，听数字"},
+  {id:"find",icon:"👂",title:"找数字",sub:"听数字，找大数字"},
+  {id:"train",icon:"🚂",title:"数字火车",sub:"找少掉的车厢"},
+  {id:"box",icon:"📦",title:"十个一盒",sub:"看盒子，找总数"},
+  {id:"grid",icon:"🗺️",title:"小百数表",sub:"在地图里找数字"},
+  {id:"jump",icon:"🐰",title:"跳一跳",sub:"听方向，自己找终点"}
+];
+const PRAISE=["太棒了！","你找到了！","做得很好！","真厉害！","我们继续玩！"];
+const HINTS=["没关系，再听一次。","我们慢慢找。","差一点点。","再看一看。"];
+const S={
+  stage:"count",
+  stars:Number(localStorage.getItem("nt_stars")||0),
+  auto:localStorage.getItem("nt_auto")!=="false",
+  colorHelp:localStorage.getItem("nt_color")!=="false",
+  done:JSON.parse(localStorage.getItem("nt_done")||"{}"),
+  cur:{}
+};
+const $=id=>document.getElementById(id);
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function pick(a){return a[ri(0,a.length-1)]}
+function sh(a){return a.slice().sort(()=>Math.random()-.5)}
+function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
+function col(n){return COLORS[Math.abs(n)%COLORS.length]}
+function save(){localStorage.setItem("nt_stars",S.stars);localStorage.setItem("nt_auto",S.auto);localStorage.setItem("nt_color",S.colorHelp);localStorage.setItem("nt_done",JSON.stringify(S.done))}
+function award(id){S.stars++;S.done[id]=true;save();topUI();navUI()}
+function isZh(v){const l=(v.lang||"").toLowerCase(),n=(v.name||"").toLowerCase();return l.indexOf("zh")===0||n.includes("chinese")||n.includes("mandarin")||n.includes("普通话")||n.includes("中文")}
+function bestVoice(){if(!window.speechSynthesis)return null;const vs=speechSynthesis.getVoices()||[];const zh=vs.filter(isZh);return zh.find(v=>(v.lang||"").toLowerCase()==="zh-cn")||zh[0]||null}
+function digitToCN(n){const d=["零","一","二","三","四","五","六","七","八","九"];n=Number(n);if(!Number.isFinite(n))return String(n);if(n<10)return d[n];if(n===10)return"十";if(n<20)return"十"+(n%10?d[n%10]:"");if(n<100)return d[Math.floor(n/10)]+"十"+(n%10?d[n%10]:"");if(n===100)return"一百";return String(n)}
+function readable(t){return String(t).replace(/\d+/g,m=>digitToCN(m))}
+function speak(t){
+  if(!window.speechSynthesis)return;
+  const u=new SpeechSynthesisUtterance(readable(t));
+  const v=bestVoice();
+  u.lang=v&&v.lang?v.lang:"zh-CN";
+  if(v)u.voice=v;
+  u.rate=.78;u.pitch=1.08;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+function auto(t){if(S.auto)setTimeout(()=>speak(t),250)}
+function topUI(){$("score").textContent="🏆 "+S.stars;$("autoBtn").classList.toggle("on",S.auto);$("colorBtn").classList.toggle("on",S.colorHelp)}
+function navUI(){
+  $("nav").innerHTML="";
+  STAGES.forEach(st=>{
+    const b=document.createElement("button");
+    b.className=S.stage===st.id?"active":"";
+    b.innerHTML='<span class="ico">'+st.icon+'</span><span><strong>'+st.title+'</strong><small>'+st.sub+'</small></span>'+(S.done[st.id]?'<em class="done">✓</em>':'');
+    b.onclick=()=>{S.stage=st.id;speak(st.sub);render(true)};
+    $("nav").appendChild(b);
+  });
+}
+function head(t,s){$("title").textContent=t;$("subtitle").textContent=s}
+function choices(ans,min,max,count=4,spread=4){const set=new Set([ans]);while(set.size<count)set.add(clamp(ans+ri(-spread,spread),min,max));return sh([...set])}
+function promptHTML(o){
+  return '<div class="prompt" style="background:'+o.c.bg+';border-color:'+o.c.solid+'"><div class="emoji">'+o.e+'</div>'+(o.n!==undefined?'<button id="target" class="target" style="color:'+o.c.fg+';box-shadow:0 0 0 7px '+o.c.light+'">'+o.n+'</button>':'')+'<div><button id="listen" class="btn">🔊 听一听</button><div class="rule">听声音 → 看颜色 → 点大按钮</div><div class="adult">'+(o.h||"")+'</div></div></div>'
+}
+function bindPrompt(text,n){$("listen").onclick=()=>speak(text);const t=$("target");if(t)t.onclick=()=>speak("这是 "+n)}
+function fb(g,t){const m=$("fb");if(m)m.innerHTML='<div class="feedback '+(g?"good":"hint")+'">'+t+'</div>'}
+function choiceHTML(n,c,hi){return '<button class="choice" data-n="'+n+'" style="color:'+c.fg+';border-color:'+(hi?c.solid:'transparent')+';box-shadow:'+(hi?'0 0 0 7px '+c.light:'0 10px 25px rgba(15,23,42,.08)')+'">'+n+'</button>'}
+function bindChoices(fn){document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)})}
+function gameCount(newQ){
+  head("点一点，数一数","孩子不识字也能玩：只要点彩色图案，程序会发音数数。");
+  if(newQ||!S.cur.count)S.cur.count={target:ri(1,7),clicked:[]};
+  const g=S.cur.count,c=col(g.target),icons=["🍎","🍌","🍓","🧸","🐥","🌸","⭐"],icon=icons[g.target%icons.length],p="请点"+c.name+"的小图案。点一个，听一个数字。";
+  $("body").innerHTML=promptHTML({e:"👆",c,h:"先不要求孩子认数字，目标是一个一个点、一个一个数。"})+'<div class="objectGrid" style="background:'+c.bg+'">'+Array.from({length:g.target},(_,i)=>'<button class="obj" data-i="'+i+'" style="border-color:'+(g.clicked.includes(i)?c.solid:'transparent')+';transform:'+(g.clicked.includes(i)?'scale(1.06)':'scale(1)')+'">'+icon+'</button>').join("")+'</div><div class="counter"><div>刚刚点了</div><strong style="color:'+c.fg+'">'+g.clicked.length+'</strong></div><div id="fb"></div>';
+  bindPrompt(p);document.querySelectorAll(".obj").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i);if(g.clicked.includes(i))return;g.clicked.push(i);speak(g.clicked.length);gameCount(false);if(g.clicked.length===g.target){const t=pick(PRAISE)+" 一共有 "+g.target+" 个。";fb(true,t);setTimeout(()=>speak(t),450);award("count")}});auto(p)
+}
+function gameFind(newQ){
+  head("听声音，找数字","先让孩子按照声音和颜色找，不要求她读文字。");
+  if(newQ||!S.cur.find){const target=ri(1,10);S.cur.find={target,choices:choices(target,1,10,4,3)}}
+  const g=S.cur.find,c=col(g.target),p=S.colorHelp?"请找 "+g.target+"。它和大卡片一样，是"+c.name+"。":"请找 "+g.target+"。";
+  $("body").innerHTML=promptHTML({e:"👂",n:g.target,c,h:"颜色帮忙开着时，正确答案和目标卡片同色；熟悉后可关闭颜色帮忙。"})+'<div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.target?c:col(n+2),S.colorHelp&&n===g.target)).join("")+'</div><div id="fb"></div>';
+  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target){const t=pick(PRAISE)+" 这是 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("find")}else{const t=pick(HINTS)+" 再找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+}
+function gameTrain(newQ){
+  head("数字火车","练习数字顺序：前面是谁，后面是谁。");
+  if(newQ||!S.cur.train){const start=ri(1,14),blank=ri(1,3),train=Array.from({length:5},(_,i)=>start+i),ans=train[blank];S.cur.train={train,blank,ans,choices:choices(ans,1,20,4,3)}}
+  const g=S.cur.train,c=col(g.ans),p="数字火车少了一节。"+g.train[g.blank-1]+" 后面是谁？请找 "+g.ans+"。";
+  $("body").innerHTML=promptHTML({e:"🚂",n:g.ans,c,h:"先用声音和颜色找答案，不急着说加一。"})+'<div class="train">'+g.train.map((n,i)=>'<div class="car" style="border-color:'+(i===g.blank?c.solid:'transparent')+';color:'+(i===g.blank?c.fg:'#1e293b')+'">'+(i===g.blank?'?':n)+'</div>').join("")+'</div><div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.ans?c:col(n+3),S.colorHelp&&n===g.ans)).join("")+'</div><div id="fb"></div>';
+  bindPrompt(p,g.ans);bindChoices(n=>{if(n===g.ans){const t=pick(PRAISE)+" "+g.ans+" 坐上了车厢。";fb(true,t);setTimeout(()=>speak(t),300);award("train")}else{const t=pick(HINTS)+" 再听一次，找 "+g.ans+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+}
+function gameBox(newQ){
+  head("十个装一盒","不用讲个位十位，先让孩子看见：十个是一盒。");
+  if(newQ||!S.cur.box){const target=ri(10,30);S.cur.box={target,choices:choices(target,10,30,4,4)}}
+  const g=S.cur.box,tens=Math.floor(g.target/10),ones=g.target%10,c=col(g.target),p="一盒是 10 个。这里有 "+tens+" 盒，还有 "+ones+" 个。请找总数 "+g.target+"。";
+  const box='<div class="tenBox"><div class="boxLabel">10</div><div class="dots">'+Array.from({length:10},()=>'<span style="background:'+c.solid+'"></span>').join("")+'</div></div>';
+  $("body").innerHTML=promptHTML({e:"📦",n:g.target,c,h:"这里用一盒十个替代十位，孩子更容易理解。"})+'<div class="boxArea" style="background:'+c.bg+'"><div class="boxes">'+Array.from({length:tens},()=>box).join("")+'</div><div class="loose">'+(ones===0?'<strong>0</strong>':Array.from({length:ones},()=>'<span style="border-color:'+c.solid+'"></span>').join(""))+'</div></div><div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.target?c:col(n+4),S.colorHelp&&n===g.target)).join("")+'</div><div id="fb"></div>';
+  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target){const t=pick(PRAISE)+" "+tens+" 盒，再加 "+ones+" 个，是 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("box")}else{const t=pick(HINTS)+" 看盒子，再找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+}
+function gridHTML(limit,target,highlightStartOnly){
+  return '<div class="hundred">'+Array.from({length:100},(_,i)=>{const n=i+1,en=n<=limit,c=col(n);let st='';if(!en)st='visibility:hidden;';else if(n===target&&S.colorHelp)st='background:'+c.solid+';color:white;box-shadow:0 0 0 4px '+c.light;else if(n===target&&highlightStartOnly)st='background:'+c.bg+';color:'+c.fg+';border-color:'+c.solid;else st='background:white;color:'+c.fg;return '<button class="cell" data-n="'+n+'" style="'+st+'" '+(en?'':'disabled')+'>'+(en?n:'')+'</button>'}).join("")+'</div>'
+}
+function bindCells(fn){document.querySelectorAll(".cell").forEach(b=>{if(b.disabled)return;b.onclick=()=>{const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)}})}
+function gameGrid(newQ,lim){
+  head("小百数表","完整百数表不是起点。先开放一到二十，再慢慢到一百。");
+  if(newQ||!S.cur.grid){const limit=lim||20;S.cur.grid={limit,target:ri(1,limit)}}if(lim){S.cur.grid.limit=lim;S.cur.grid.target=ri(1,lim)}
+  const g=S.cur.grid,c=col(g.target),p="请在数字地图里找到 "+g.target+"。它现在是"+c.name+"的大数字。";
+  $("body").innerHTML=promptHTML({e:"🗺️",n:g.target,c,h:"孩子只要听目标数字，然后在地图上点它。"})+'<div class="limitBtns">'+[20,50,100].map(n=>'<button class="toggle '+(g.limit===n?'on':'')+'" data-lim="'+n+'">练 1–'+n+'</button>').join("")+'</div>'+gridHTML(g.limit,g.target,false)+'<div id="fb"></div>';
+  bindPrompt(p,g.target);document.querySelectorAll("[data-lim]").forEach(b=>b.onclick=()=>gameGrid(true,Number(b.dataset.lim)));
+  bindCells(n=>{if(n===g.target){const t=pick(PRAISE)+" 找到了 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("grid")}else{const t=pick(HINTS)+" 再听一次，找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+}
+function jumpTask(){
+  const dirs=[
+    {label:"往右走一格",delta:1,hint:"往右走，数字多一"},
+    {label:"往左走一格",delta:-1,hint:"往左走，数字少一"},
+    {label:"往下跳一格",delta:10,hint:"往下跳，数字多十"},
+    {label:"往上跳一格",delta:-10,hint:"往上跳，数字少十"}
+  ];
+  const tasks=[];for(let s=1;s<=100;s++){dirs.forEach(d=>{const dest=s+d.delta;if(dest<1||dest>100)return;if(d.delta===1&&s%10===0)return;if(d.delta===-1&&s%10===1)return;tasks.push({start:s,dest,dir:d})})}return pick(tasks)
+}
+function gameJump(newQ){
+  head("百数表跳一跳","只高亮起点，不显示答案。孩子要根据方向自己找终点。");
+  if(newQ||!S.cur.jump)S.cur.jump=jumpTask();
+  const g=S.cur.jump,c=col(g.start),p="小兔子在 "+g.start+"。请让小兔子 "+g.dir.label+"。";
+  $("body").innerHTML=promptHTML({e:"🐰",n:g.start,c,h:"这里不再框出答案，只显示起点。孩子需要自己判断往哪一格跳。"})+gridHTML(100,g.start,true)+'<div id="fb"></div>';
+  bindPrompt(p,g.start);bindCells(n=>{if(n===g.dest){const t=pick(PRAISE)+" 从 "+g.start+" "+g.dir.label+"，到了 "+g.dest+"。";fb(true,t);setTimeout(()=>speak(t),300);award("jump")}else{const t=pick(HINTS)+" "+g.dir.hint+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+}
+function render(newQ=true){save();topUI();navUI();if(S.stage==="count")gameCount(newQ);else if(S.stage==="find")gameFind(newQ);else if(S.stage==="train")gameTrain(newQ);else if(S.stage==="box")gameBox(newQ);else if(S.stage==="grid")gameGrid(newQ);else gameJump(newQ)}
+$("newQ").onclick=()=>render(true);
+$("autoBtn").onclick=()=>{S.auto=!S.auto;save();topUI()};
+$("colorBtn").onclick=()=>{S.colorHelp=!S.colorHelp;save();topUI();render(false)};
+$("testVoice").onclick=()=>speak("你好，我会说中文。一，二，三，四，五。请听声音，看颜色，点大数字。");
+if(window.speechSynthesis){speechSynthesis.onvoiceschanged=()=>{}}
+render(true);
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"81146d2a0f894cf1acd01fb991f2b085","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
