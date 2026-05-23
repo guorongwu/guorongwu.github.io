@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>百数表填空游戏</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:#1f2937;
+  background:linear-gradient(135deg,#fff7ed,#fefce8 42%,#eff6ff);
+}
+button,input{font-family:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:1100px;margin:0 auto;padding:18px}
+.header{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:center;
+  background:rgba(255,255,255,.92);
+  border-radius:30px;
+  padding:22px;
+  box-shadow:0 12px 35px rgba(15,23,42,.08);
+}
+.badge{
+  display:inline-block;
+  background:#ffedd5;
+  color:#9a3412;
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:900;
+  font-size:14px;
+}
+h1{margin:10px 0 8px;font-size:clamp(28px,5vw,48px);line-height:1.08}
+.header p{margin:0;color:#64748b;font-size:17px;line-height:1.55}
+.stats{
+  display:grid;
+  gap:10px;
+  min-width:190px;
+}
+.stat{
+  background:white;
+  border-radius:24px;
+  padding:12px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+}
+.stat small{display:block;color:#64748b;font-weight:800}
+.stat strong{display:block;font-size:34px;color:#f97316;line-height:1.1}
+.panel{
+  margin-top:16px;
+  background:rgba(255,255,255,.94);
+  border-radius:32px;
+  box-shadow:0 12px 35px rgba(15,23,42,.08);
+  overflow:hidden;
+}
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px;
+  background:white;
+  border-bottom:1px solid #e2e8f0;
+}
+.leftTools,.rightTools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{
+  border:0;
+  border-radius:20px;
+  padding:12px 16px;
+  font-size:16px;
+  font-weight:900;
+  color:white;
+  background:#fb923c;
+  box-shadow:0 8px 18px rgba(251,146,60,.22);
+}
+.btn.secondary{
+  background:white;
+  color:#475569;
+  border:2px solid #e2e8f0;
+  box-shadow:none;
+}
+.btn.secondary.active{
+  color:white;
+  background:#fb923c;
+  border-color:#fb923c;
+}
+.btn:disabled,.btn.secondary:disabled{
+  cursor:not-allowed;
+  opacity:.5;
+  box-shadow:none;
+}
+.gameArea{
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:18px;
+  padding:20px;
+}
+.questionCard{
+  background:#f8fafc;
+  border-radius:28px;
+  padding:18px;
+}
+.questionTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:14px;
+}
+.questionTop h2{margin:0;font-size:26px}
+.questionTop p{margin:6px 0 0;color:#64748b;line-height:1.5}
+.kindPill{
+  white-space:nowrap;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:900;
+  color:#92400e;
+  background:#fef3c7;
+}
+.gridWrap{
+  display:flex;
+  justify-content:center;
+  padding:12px;
+}
+.numberGrid{
+  display:grid;
+  gap:8px;
+  width:min(100%,560px);
+}
+.numberGrid.size3{grid-template-columns:repeat(3,1fr)}
+.numberGrid.size4{grid-template-columns:repeat(4,1fr)}
+.numberGrid.size5{grid-template-columns:repeat(5,1fr)}
+.cell{
+  aspect-ratio:1/1;
+  min-height:72px;
+  border-radius:22px;
+  border:4px solid transparent;
+  background:white;
+  display:grid;
+  place-items:center;
+  font-size:clamp(24px,5vw,46px);
+  font-weight:1000;
+  box-shadow:0 8px 18px rgba(15,23,42,.06);
+  position:relative;
+}
+.cell.empty{
+  background:transparent;
+  box-shadow:none;
+}
+.cell.given{
+  color:#1e293b;
+}
+.cell.blank{
+  border-style:dashed;
+  border-color:#fb923c;
+  color:#ea580c;
+  background:#fff7ed;
+}
+.cell.blank.selected{
+  border-color:#2563eb;
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+.cell.blank.correct,
+.cell.blank.correct.selected{
+  border-color:#22c55e;
+  background:#dcfce7;
+  color:#166534;
+}
+.cell.blank.wrong,
+.cell.blank.wrong.selected{
+  border-color:#ef4444;
+  background:#fee2e2;
+  color:#991b1b;
+  animation:shake .22s ease-in-out;
+}
+.cell small{
+  position:absolute;
+  bottom:6px;
+  right:9px;
+  font-size:12px;
+  color:#94a3b8;
+  font-weight:800;
+}
+.side{
+  display:grid;
+  align-content:start;
+  gap:14px;
+}
+.card{
+  background:white;
+  border-radius:26px;
+  padding:16px;
+  box-shadow:0 8px 20px rgba(15,23,42,.06);
+}
+.card h3{margin:0 0 10px;font-size:20px}
+.card p{margin:0;color:#64748b;line-height:1.55}
+.selectedBox{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+}
+.selectedNumber{
+  border-radius:18px;
+  padding:12px;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-weight:1000;
+  font-size:22px;
+  text-align:center;
+}
+.answerChoices{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+.answerChoices button{
+  border:3px solid transparent;
+  border-radius:18px;
+  background:#f8fafc;
+  min-height:58px;
+  font-size:26px;
+  font-weight:1000;
+  color:#334155;
+}
+.answerChoices button:hover{border-color:#fb923c;background:#fff7ed}
+.inputRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  margin-top:10px;
+}
+.inputRow input{
+  width:100%;
+  border:3px solid #e2e8f0;
+  border-radius:18px;
+  padding:12px;
+  font-size:22px;
+  font-weight:900;
+  text-align:center;
+}
+.feedback{
+  border-radius:24px;
+  padding:16px;
+  font-size:20px;
+  font-weight:1000;
+}
+.feedback.good{background:#dcfce7;color:#166534}
+.feedback.hint{background:#dbeafe;color:#1d4ed8}
+.feedback.bad{background:#fee2e2;color:#991b1b}
+.legend{
+  display:grid;
+  gap:8px;
+}
+.legend div{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:#64748b;
+  font-weight:800;
+}
+.dot{width:18px;height:18px;border-radius:6px;display:inline-block}
+.dot.given{background:white;border:2px solid #cbd5e1}
+.dot.blank{background:#fff7ed;border:2px dashed #fb923c}
+.dot.selected{background:#dbeafe;border:2px dashed #2563eb}
+.footerHelp{
+  margin-top:16px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.helpBox{
+  background:rgba(255,255,255,.88);
+  border-radius:24px;
+  padding:16px;
+  box-shadow:0 8px 20px rgba(15,23,42,.05);
+}
+.helpBox strong{display:block;margin-bottom:6px}
+.helpBox p{margin:0;color:#64748b;line-height:1.5}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}
+}
+@media(max-width:900px){
+  .header,.gameArea{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .side{grid-template-columns:1fr 1fr}
+  .footerHelp{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .app{padding:10px}
+  .header,.toolbar,.gameArea{padding:14px}
+  .side{grid-template-columns:1fr}
+  .cell{min-height:54px;border-radius:16px;font-size:26px}
+  .numberGrid{gap:5px}
+  .answerChoices button{min-height:50px;font-size:22px}
+  .questionTop{display:block}
+  .kindPill{display:inline-block;margin-top:10px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div>
+      <div class="badge">🎲 百数表填空游戏</div>
+      <h1>看上下左右，填空格</h1>
+      <p>不需要语音。观察百数表小地图里的数字规律，点空格，再选择或输入正确数字。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><small>得分</small><strong id="score">0</strong></div>
+      <div class="stat"><small>连对</small><strong id="streak">0</strong></div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="toolbar">
+      <div class="leftTools">
+        <button class="btn secondary active" data-level="easy">初级</button>
+        <button class="btn secondary" data-level="normal">标准</button>
+        <button class="btn secondary" data-level="hard">挑战</button>
+      </div>
+      <div class="rightTools">
+        <button class="btn secondary" id="clearBtn">清空</button>
+        <button class="btn secondary" id="checkBtn">检查</button>
+        <button class="btn" id="newBtn">下一题</button>
+      </div>
+    </div>
+
+    <div class="gameArea">
+      <div class="questionCard">
+        <div class="questionTop">
+          <div>
+            <h2 id="questionTitle">题目</h2>
+            <p id="questionText">点一个空格，然后在右边选择数字。</p>
+          </div>
+          <div class="kindPill" id="kindPill">九宫格</div>
+        </div>
+        <div class="gridWrap">
+          <div id="numberGrid" class="numberGrid size3"></div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <h3>当前空格</h3>
+          <div class="selectedBox">
+            <div class="selectedNumber" id="selectedBox">请点 ?</div>
+            <button class="btn secondary" id="eraseBtn">擦掉</button>
+          </div>
+          <div class="inputRow">
+            <input id="manualInput" type="number" min="1" max="100" placeholder="输入数字">
+            <button class="btn" id="fillBtn">填入</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>选择答案</h3>
+          <div class="answerChoices" id="answerChoices"></div>
+        </div>
+
+        <div class="card">
+          <h3>提示</h3>
+          <p id="hintText">横着相邻差 1，竖着相邻差 10。</p>
+        </div>
+
+        <div id="feedback" class="feedback hint">准备好了，点一个空格开始。</div>
+
+        <div class="card legend">
+          <div><span class="dot given"></span> 已给数字</div>
+          <div><span class="dot blank"></span> 需要填写</div>
+          <div><span class="dot selected"></span> 当前选择</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="footerHelp">
+    <div class="helpBox">
+      <strong>横着看</strong>
+      <p>左边的数字少 1，右边的数字多 1。</p>
+    </div>
+    <div class="helpBox">
+      <strong>竖着看</strong>
+      <p>上面的数字少 10，下面的数字多 10。</p>
+    </div>
+    <div class="helpBox">
+      <strong>怎么玩</strong>
+      <p>先点问号，再点候选数字；也可以直接输入数字。</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const state = {
+  level: "easy",
+  score: Number(localStorage.getItem("fillGameScore") || 0),
+  streak: Number(localStorage.getItem("fillGameStreak") || 0),
+  puzzle: null,
+  selected: null
+};
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shuffle(arr) {
+  return arr.slice().sort(() => Math.random() - 0.5);
+}
+
+function numAt(row, col) {
+  return row * 10 + col + 1;
+}
+
+function keyOf(row, col) {
+  return row + "," + col;
+}
+
+function parseKey(key) {
+  const parts = key.split(",").map(Number);
+  return { row: parts[0], col: parts[1] };
+}
+
+function saveStats() {
+  localStorage.setItem("fillGameScore", String(state.score));
+  localStorage.setItem("fillGameStreak", String(state.streak));
+}
+
+function updateStats() {
+  $("score").textContent = state.score;
+  $("streak").textContent = state.streak;
+}
+
+function setFeedback(type, text) {
+  const el = $("feedback");
+  el.className = "feedback " + type;
+  el.textContent = text;
+}
+
+function allBlankKeys(cells) {
+  return Object.keys(cells).filter(k => cells[k].blank);
+}
+
+function makeDistractors(answer) {
+  const set = new Set([answer]);
+  const candidates = [
+    answer - 20, answer - 10, answer - 2, answer - 1,
+    answer + 1, answer + 2, answer + 10, answer + 20
+  ];
+  shuffle(candidates).forEach(n => {
+    if (n >= 1 && n <= 100 && set.size < 6) set.add(n);
+  });
+  while (set.size < 6) set.add(rand(1, 100));
+  return shuffle(Array.from(set));
+}
+
+function makeAllChoices(answers) {
+  const set = new Set(answers);
+  answers.forEach(ans => {
+    [ans - 10, ans + 10, ans - 1, ans + 1, ans - 2, ans + 2].forEach(n => {
+      if (n >= 1 && n <= 100 && set.size < 9) set.add(n);
+    });
+  });
+  while (set.size < 9) set.add(rand(1, 100));
+  return shuffle(Array.from(set));
+}
+
+function blankSome(cells, keys, count) {
+  shuffle(keys).slice(0, count).forEach(k => {
+    cells[k].blank = true;
+    cells[k].value = "";
+  });
+}
+
+function makeCrossPuzzle(blankCount) {
+  const row = rand(1, 8);
+  const col = rand(1, 8);
+  const positions = [
+    [row - 1, col],
+    [row, col - 1],
+    [row, col],
+    [row, col + 1],
+    [row + 1, col]
+  ];
+  const cells = {};
+  positions.forEach(([r, c]) => {
+    cells[keyOf(r, c)] = { answer: numAt(r, c), value: numAt(r, c), blank: false, active: true };
+  });
+  const possible = positions.map(([r,c]) => keyOf(r,c));
+  blankSome(cells, possible, blankCount);
+  return {
+    size: 3,
+    originRow: row - 1,
+    originCol: col - 1,
+    cells,
+    title: blankCount === 1 ? "十字填一个数" : "十字填两个数",
+    kind: "十字题",
+    text: "看中心和上下左右，填出问号里的数字。",
+    hint: "中间往上少 10，往下多 10，往左少 1，往右多 1。"
+  };
+}
+
+function makePatchPuzzle(blankCount) {
+  const originRow = rand(0, 7);
+  const originCol = rand(0, 7);
+  const cells = {};
+  const keys = [];
+  for (let r = originRow; r < originRow + 3; r++) {
+    for (let c = originCol; c < originCol + 3; c++) {
+      const k = keyOf(r, c);
+      keys.push(k);
+      cells[k] = { answer: numAt(r, c), value: numAt(r, c), blank: false, active: true };
+    }
+  }
+  blankSome(cells, keys, blankCount);
+  return {
+    size: 3,
+    originRow,
+    originCol,
+    cells,
+    title: blankCount === 1 ? "九宫格填一个数" : "九宫格填两个数",
+    kind: "九宫格",
+    text: "这是百数表里切下来的一小块，请把空格补完整。",
+    hint: "同一行从左到右每次多 1；同一列从上到下每次多 10。"
+  };
+}
+
+function makeRowColPuzzle(blankCount) {
+  const horizontal = Math.random() < 0.5;
+  const cells = {};
+  let originRow, originCol, keys = [];
+  if (horizontal) {
+    originRow = rand(0, 9);
+    originCol = rand(0, 5);
+    for (let c = originCol; c < originCol + 5; c++) {
+      const k = keyOf(originRow, c);
+      keys.push(k);
+      cells[k] = { answer: numAt(originRow, c), value: numAt(originRow, c), blank: false, active: true };
+    }
+    blankSome(cells, keys.slice(1, 4), blankCount);
+    return {
+      size: 5,
+      originRow,
+      originCol,
+      cells,
+      title: "横排小桥",
+      kind: "横排题",
+      text: "数字小桥断了，请补上空格。",
+      hint: "横着走，每往右一格，数字多 1。"
+    };
+  } else {
+    originRow = rand(0, 5);
+    originCol = rand(0, 9);
+    for (let r = originRow; r < originRow + 5; r++) {
+      const k = keyOf(r, originCol);
+      keys.push(k);
+      cells[k] = { answer: numAt(r, originCol), value: numAt(r, originCol), blank: false, active: true };
+    }
+    blankSome(cells, keys.slice(1, 4), blankCount);
+    return {
+      size: 5,
+      originRow,
+      originCol,
+      cells,
+      title: "竖排电梯",
+      kind: "竖排题",
+      text: "数字电梯少了几层，请补上空格。",
+      hint: "竖着走，每往下一格，数字多 10。"
+    };
+  }
+}
+
+function makeCornerPuzzle(blankCount) {
+  const row = rand(0, 7);
+  const col = rand(0, 7);
+  const shape = Math.random() < 0.5
+    ? [[0,0],[0,1],[0,2],[1,2],[2,2]]
+    : [[0,0],[1,0],[2,0],[2,1],[2,2]];
+  const cells = {};
+  const keys = [];
+  shape.forEach(([dr, dc]) => {
+    const r = row + dr, c = col + dc;
+    const k = keyOf(r, c);
+    keys.push(k);
+    cells[k] = { answer: numAt(r, c), value: numAt(r, c), blank: false, active: true };
+  });
+  blankSome(cells, keys.slice(1, 4), blankCount);
+  return {
+    size: 3,
+    originRow: row,
+    originCol: col,
+    cells,
+    title: "拐弯小路",
+    kind: "拐弯题",
+    text: "沿着小路看数字，补上空格。",
+    hint: "横着变 1，竖着变 10。遇到拐弯时，要换一种方向看。"
+  };
+}
+
+function makePuzzle() {
+  const level = state.level;
+  if (level === "easy") {
+    const makers = [
+      () => makeCrossPuzzle(1),
+      () => makePatchPuzzle(1),
+      () => makeRowColPuzzle(1)
+    ];
+    return pickMaker(makers)();
+  }
+  if (level === "normal") {
+    const makers = [
+      () => makeCrossPuzzle(2),
+      () => makePatchPuzzle(2),
+      () => makeRowColPuzzle(2),
+      () => makeCornerPuzzle(1)
+    ];
+    return pickMaker(makers)();
+  }
+  const makers = [
+    () => makePatchPuzzle(2),
+    () => makeRowColPuzzle(2),
+    () => makeCornerPuzzle(2)
+  ];
+  return pickMaker(makers)();
+}
+
+function pickMaker(makers) {
+  return makers[rand(0, makers.length - 1)];
+}
+
+function isSolved() {
+  return !!(state.puzzle && state.puzzle.scored);
+}
+
+function updateLocks() {
+  const locked = !isSolved();
+  $("newBtn").disabled = locked;
+  document.querySelectorAll("[data-level]").forEach(btn => {
+    btn.disabled = locked;
+  });
+}
+
+function renderPuzzle() {
+  const p = state.puzzle;
+  $("questionTitle").textContent = p.title;
+  $("questionText").textContent = p.text;
+  $("kindPill").textContent = p.kind;
+  $("hintText").textContent = p.hint;
+
+  const grid = $("numberGrid");
+  grid.className = "numberGrid size" + p.size;
+  grid.innerHTML = "";
+
+  for (let rr = 0; rr < p.size; rr++) {
+    for (let cc = 0; cc < p.size; cc++) {
+      const realRow = p.originRow + rr;
+      const realCol = p.originCol + cc;
+      const k = keyOf(realRow, realCol);
+      const cell = p.cells[k];
+      const btn = document.createElement("button");
+
+      if (!cell) {
+        btn.className = "cell empty";
+        btn.disabled = true;
+        grid.appendChild(btn);
+        continue;
+      }
+
+      btn.dataset.key = k;
+      if (cell.blank) {
+        let statusClass = "";
+        if (cell.status === "correct") statusClass = " correct";
+        if (cell.status === "wrong") statusClass = " wrong";
+        btn.className = "cell blank" + statusClass + (state.selected === k ? " selected" : "");
+        btn.textContent = cell.value || "?";
+        btn.addEventListener("click", () => selectBlank(k));
+      } else {
+        btn.className = "cell given";
+        btn.textContent = cell.answer;
+      }
+      grid.appendChild(btn);
+    }
+  }
+
+  renderChoices();
+  renderSelected();
+  updateLocks();
+}
+
+function renderSelected() {
+  if (!state.selected) {
+    $("selectedBox").textContent = "请点 ?";
+    $("manualInput").value = "";
+    return;
+  }
+  const cell = state.puzzle.cells[state.selected];
+  $("selectedBox").textContent = cell.value ? "已填：" + cell.value : "正在填：?";
+  $("manualInput").value = cell.value || "";
+}
+
+function renderChoices() {
+  const blanks = allBlankKeys(state.puzzle.cells);
+  const answers = blanks.map(k => state.puzzle.cells[k].answer);
+  const choices = makeAllChoices(answers);
+  const box = $("answerChoices");
+  box.innerHTML = "";
+  choices.forEach(n => {
+    const b = document.createElement("button");
+    b.textContent = n;
+    b.addEventListener("click", () => fillSelected(n));
+    box.appendChild(b);
+  });
+}
+
+function selectBlank(key) {
+  state.selected = key;
+  renderPuzzle();
+  setFeedback("hint", "选好了，现在填这个空格。");
+}
+
+function fillSelected(value) {
+  if (!state.selected) {
+    setFeedback("hint", "先点一个问号空格，再填数字。");
+    return;
+  }
+
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 1 || n > 100) {
+    setFeedback("bad", "请输入 1 到 100 之间的数字。");
+    return;
+  }
+
+  const cell = state.puzzle.cells[state.selected];
+  cell.value = n;
+
+  if (n === cell.answer) {
+    cell.status = "correct";
+    const blanks = allBlankKeys(state.puzzle.cells);
+    const nextEmpty = blanks.find(k => {
+      const c = state.puzzle.cells[k];
+      return !c.value || c.status === "wrong";
+    });
+
+    state.selected = nextEmpty || state.selected;
+    renderPuzzle();
+
+    const allCorrect = blanks.every(k => state.puzzle.cells[k].status === "correct");
+    if (allCorrect) {
+      if (!state.puzzle.scored) {
+        state.score += 10 + blanks.length * 5;
+        state.streak += 1;
+        state.puzzle.scored = true;
+        saveStats();
+        updateStats();
+      }
+      setFeedback("good", "全对了！绿色表示通过，现在才能进入下一题。");
+    } else {
+      setFeedback("good", "这个对了！绿色表示正确，继续填下一个空格。");
+    }
+  } else {
+    cell.status = "wrong";
+    renderPuzzle();
+    state.selected = Object.keys(state.puzzle.cells).find(k => state.puzzle.cells[k] === cell) || state.selected;
+    renderPuzzle();
+    setFeedback("bad", "这个不对。红色表示错误，必须改对后才能进入下一题。");
+  }
+}
+
+function clearAnswers() {
+  Object.values(state.puzzle.cells).forEach(cell => {
+    if (cell.blank) {
+      cell.value = "";
+      cell.status = "";
+    }
+  });
+  state.puzzle.scored = false;
+  state.selected = allBlankKeys(state.puzzle.cells)[0] || null;
+  renderPuzzle();
+  setFeedback("hint", "已经清空，重新填一遍。");
+}
+
+function eraseSelected() {
+  if (!state.selected) return;
+  state.puzzle.cells[state.selected].value = "";
+  state.puzzle.cells[state.selected].status = "";
+  state.puzzle.scored = false;
+  renderPuzzle();
+  setFeedback("hint", "这个空格已经擦掉。");
+}
+
+function checkAnswers() {
+  const blanks = allBlankKeys(state.puzzle.cells);
+  let missing = blanks.filter(k => !state.puzzle.cells[k].value);
+  if (missing.length) {
+    state.selected = missing[0];
+    renderPuzzle();
+    setFeedback("hint", "还有空格没填完。");
+    return;
+  }
+
+  let correct = true;
+  blanks.forEach(k => {
+    const cell = state.puzzle.cells[k];
+    if (Number(cell.value) === cell.answer) {
+      cell.status = "correct";
+    } else {
+      cell.status = "wrong";
+      correct = false;
+    }
+  });
+
+  renderPuzzle();
+
+  if (correct) {
+    if (!state.puzzle.scored) {
+      state.score += 10 + blanks.length * 5;
+      state.streak += 1;
+      state.puzzle.scored = true;
+      saveStats();
+      updateStats();
+    }
+    setFeedback("good", "全对了！绿色表示通过，现在才能进入下一题。");
+  } else {
+    state.streak = 0;
+    saveStats();
+    updateStats();
+    setFeedback("bad", "还有错误。红色空格必须全部改成绿色，才能进入下一题。");
+  }
+}
+
+function newPuzzle() {
+  state.puzzle = makePuzzle();
+  state.puzzle.scored = false;
+  state.selected = allBlankKeys(state.puzzle.cells)[0] || null;
+  renderPuzzle();
+  setFeedback("hint", "点问号，选择或输入数字。只有全部填对，下一题按钮才会解锁。");
+}
+
+function setLevel(level) {
+  state.level = level;
+  document.querySelectorAll("[data-level]").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.level === level);
+  });
+  newPuzzle();
+}
+
+document.querySelectorAll("[data-level]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (!isSolved()) {
+      setFeedback("bad", "请先完成当前题目。全部填对后，才能换难度或进入下一题。");
+      return;
+    }
+    setLevel(btn.dataset.level);
+  });
+});
+
+$("newBtn").addEventListener("click", () => {
+  if (!isSolved()) {
+    setFeedback("bad", "这一题还没通过。请把红色空格改对，全部变成绿色后再进入下一题。");
+    return;
+  }
+  newPuzzle();
+});
+$("clearBtn").addEventListener("click", clearAnswers);
+$("eraseBtn").addEventListener("click", eraseSelected);
+$("checkBtn").addEventListener("click", checkAnswers);
+$("fillBtn").addEventListener("click", () => fillSelected($("manualInput").value));
+$("manualInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") fillSelected($("manualInput").value);
+});
+
+function init() {
+  updateStats();
+  newPuzzle();
+}
+
+init();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"81146d2a0f894cf1acd01fb991f2b085","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
