@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>数字小镇：稳定中文发音版</title>
+<title>数字小镇：百数表丰富版</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fff7ed,#eff6ff);color:#1e293b}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#fff7ed,#fffbeb 45%,#eff6ff);color:#1e293b}
 button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.app{max-width:1220px;margin:0 auto;padding:16px}
+.app{max-width:1240px;margin:0 auto;padding:16px}
 .header{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;background:rgba(255,255,255,.92);border-radius:30px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
 .badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:7px 12px;font-weight:900}
 h1{margin:10px 0 8px;font-size:clamp(28px,4.5vw,48px);line-height:1.08}
@@ -33,14 +33,14 @@ p{line-height:1.6}
 .cardHead h2{margin:0;font-size:30px}
 .cardHead p{margin:6px 0 0;color:#64748b}
 .body{padding:22px}
-.prompt{display:grid;grid-template-columns:auto auto 1fr;gap:20px;align-items:center;border:5px solid;border-radius:32px;padding:18px;margin-bottom:20px}
+.prompt{display:grid;grid-template-columns:auto auto 1fr;gap:20px;align-items:center;border:5px solid;border-radius:32px;padding:18px;margin-bottom:18px}
 .emoji{font-size:64px;animation:pulse 1.8s ease-in-out infinite}
 .target{min-width:120px;min-height:110px;border:0;border-radius:30px;background:white;font-size:74px;font-weight:1000;line-height:1}
 .rule{font-weight:1000;color:#334155;margin-top:8px}
 .adult{color:#64748b;font-size:14px;margin-top:5px}
 .choiceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .choice{min-height:118px;border:5px solid transparent;border-radius:30px;background:white;font-size:62px;font-weight:1000;box-shadow:0 10px 25px rgba(15,23,42,.08);transition:.15s}
-.choice:hover,.obj:hover,.cell:hover{transform:translateY(-2px)}
+.choice:hover,.obj:hover,.cell:hover,.miniCell:hover{transform:translateY(-2px)}
 .objectGrid{display:grid;grid-template-columns:repeat(5,minmax(80px,1fr));gap:14px;padding:20px;border-radius:32px;min-height:230px}
 .obj{min-height:100px;border:5px solid transparent;border-radius:30px;background:white;font-size:58px;box-shadow:0 8px 18px rgba(15,23,42,.08);transition:.15s}
 .counter{margin-top:15px;background:white;border-radius:28px;padding:16px;text-align:center;box-shadow:0 8px 20px rgba(15,23,42,.06)}
@@ -59,34 +59,56 @@ p{line-height:1.6}
 .dots span{height:18px;border-radius:6px}
 .loose{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;min-height:54px;align-items:center}
 .loose span{height:42px;width:42px;border-radius:14px;background:white;border:4px solid;box-shadow:0 8px 18px rgba(15,23,42,.06)}
-.limitBtns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.limitBtns,.modeBtns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.modeBtns{background:#f8fafc;border-radius:26px;padding:10px}
+.modeBtns .toggle{font-size:14px;padding:10px 12px;border-radius:18px}
 .hundred{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;padding:14px;background:#f8fafc;border-radius:28px}
-.cell{aspect-ratio:1/1;border:3px solid transparent;border-radius:14px;font-size:clamp(12px,1.55vw,20px);font-weight:1000;box-shadow:0 5px 10px rgba(15,23,42,.04)}
+.cell{aspect-ratio:1/1;border:3px solid transparent;border-radius:14px;font-size:clamp(12px,1.55vw,20px);font-weight:1000;box-shadow:0 5px 10px rgba(15,23,42,.04);background:white}
+.miniProblem{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;background:#f8fafc;border-radius:28px;padding:16px;margin-bottom:16px}
+.miniCell{min-height:85px;border:4px dashed transparent;border-radius:24px;background:white;display:grid;place-items:center;font-size:42px;font-weight:1000;box-shadow:0 8px 18px rgba(15,23,42,.06)}
+.pathBox{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;background:#f8fafc;border-radius:26px;padding:14px}
+.pathChip{background:white;border-radius:20px;padding:12px 14px;font-weight:1000;box-shadow:0 6px 14px rgba(15,23,42,.06)}
 .guide{margin-top:16px;padding:22px}
 .guide h3{margin:0 0 14px;font-size:23px}
 .guideGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .guideGrid div{padding:16px;border-radius:24px;background:#f8fafc}
 .guideGrid strong{display:block;margin-bottom:8px}
 .guideGrid p{margin:0;color:#64748b}
+.soundGate{position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.58);display:grid;place-items:center;padding:20px}
+.soundGate.hide{display:none}
+.soundCard{max-width:520px;background:white;border-radius:32px;padding:26px;text-align:center;box-shadow:0 25px 80px rgba(15,23,42,.25)}
+.soundCard .big{font-size:70px;margin-bottom:8px}
+.soundCard h2{margin:0 0 8px;font-size:30px}
+.soundCard p{color:#64748b;margin:0 0 18px}
+.soundCard button{font-size:22px;padding:18px 24px;border-radius:26px}
 @keyframes pulse{50%{transform:scale(1.08)}}
 @media(max-width:920px){.header,.layout{grid-template-columns:1fr}.nav{grid-template-columns:repeat(2,1fr)}.prompt{grid-template-columns:1fr;text-align:center}.choiceGrid{grid-template-columns:repeat(2,1fr)}.guideGrid{grid-template-columns:1fr}}
-@media(max-width:620px){.app{padding:10px}.cardHead,.body,.guide,.header{padding:14px}.nav{grid-template-columns:1fr}.objectGrid{grid-template-columns:repeat(3,1fr)}.obj{min-height:82px;font-size:46px}.choice{min-height:95px;font-size:48px}.car{min-height:72px;font-size:30px;border-radius:18px}.train{gap:6px;padding:10px}.hundred{gap:3px;padding:8px}.cell{border-radius:8px;font-size:11px}.target{min-width:100px;min-height:96px;font-size:62px}}
+@media(max-width:620px){.app{padding:10px}.cardHead,.body,.guide,.header{padding:14px}.nav{grid-template-columns:1fr}.objectGrid{grid-template-columns:repeat(3,1fr)}.obj{min-height:82px;font-size:46px}.choice{min-height:95px;font-size:48px}.car{min-height:72px;font-size:30px;border-radius:18px}.train{gap:6px;padding:10px}.hundred{gap:3px;padding:8px}.cell{border-radius:8px;font-size:11px}.target{min-width:100px;min-height:96px;font-size:62px}.miniProblem{grid-template-columns:repeat(5,1fr);gap:5px;padding:8px}.miniCell{min-height:55px;font-size:26px;border-radius:14px}}
 </style>
 </head>
 <body>
+<div id="soundGate" class="soundGate">
+  <div class="soundCard">
+    <div class="big">🔊</div>
+    <h2>先启动声音</h2>
+    <p>手机浏览器通常不允许网页自己发声。请先点这个按钮，再开始练习。</p>
+    <button id="startSound" class="btn">启动中文声音</button>
+  </div>
+</div>
+
 <div class="app">
   <header class="header">
     <div>
-      <div class="badge">✨ 数字小镇：稳定版</div>
-      <h1>听中文，看颜色，点大数字</h1>
-      <p>这个版本不再等待“加载中文声音”。Windows 正常中文时保持原方式；Mac 如果系统语音不兼容，程序也不会卡住。</p>
+      <div class="badge">✨ 数字小镇：百数表丰富版</div>
+      <h1>听中文，看颜色，玩百数表</h1>
+      <p>百数表游戏新增：找数、补空、找邻居、上下楼、路线任务。跳一跳不再把答案框出来。</p>
     </div>
     <div class="controls">
       <div id="score" class="score">🏆 0</div>
       <button id="testVoice" class="btn">🔈 测试发音</button>
       <button id="autoBtn" class="toggle on">🔊 自动发音</button>
       <button id="colorBtn" class="toggle on">🎨 颜色帮忙</button>
-      <div class="note">语音由浏览器/系统提供；Mac 若读英文，需换 Safari 或安装/选择中文系统语音。</div>
+      <div class="note">手机上先点“启动中文声音”。若内置浏览器无声，请用 Safari 或 Chrome 打开。</div>
     </div>
   </header>
   <div class="layout">
@@ -100,11 +122,11 @@ p{line-height:1.6}
         <div id="body" class="body"></div>
       </section>
       <section class="guide">
-        <h3>成人实验方式</h3>
+        <h3>百数表游戏的学习目标</h3>
         <div class="guideGrid">
-          <div><strong>第一轮</strong><p>打开颜色帮忙，让孩子先学会听声音、看颜色、点目标。</p></div>
-          <div><strong>第二轮</strong><p>关闭颜色帮忙，观察她是否能靠声音和数字形状寻找。</p></div>
-          <div><strong>跳一跳</strong><p>现在只高亮起点，不高亮答案。孩子需要自己根据方向找终点。</p></div>
+          <div><strong>空间关系</strong><p>右边、左边、上面、下面，不直接讲抽象术语，先让孩子用手点。</p></div>
+          <div><strong>规律发现</strong><p>往右多一，往下多十；路线题会把两个动作连起来。</p></div>
+          <div><strong>不泄露答案</strong><p>百数表游戏只提示起点或缺口，不框出终点，让孩子自己判断。</p></div>
         </div>
       </section>
     </main>
@@ -126,16 +148,26 @@ const STAGES=[
   {id:"train",icon:"🚂",title:"数字火车",sub:"找少掉的车厢"},
   {id:"box",icon:"📦",title:"十个一盒",sub:"看盒子，找总数"},
   {id:"grid",icon:"🗺️",title:"小百数表",sub:"在地图里找数字"},
-  {id:"jump",icon:"🐰",title:"跳一跳",sub:"听方向，自己找终点"}
+  {id:"hundred",icon:"🎲",title:"百数表游戏",sub:"找邻居、补空、走路线"}
+];
+const MODES=[
+  {id:"jump",label:"🐰 跳一格"},
+  {id:"neighbor",label:"🏠 找邻居"},
+  {id:"blank",label:"🧩 补空格"},
+  {id:"stairs",label:"🏢 上下楼"},
+  {id:"route",label:"🧭 走路线"}
 ];
 const PRAISE=["太棒了！","你找到了！","做得很好！","真厉害！","我们继续玩！"];
 const HINTS=["没关系，再听一次。","我们慢慢找。","差一点点。","再看一看。"];
 const S={
   stage:"count",
-  stars:Number(localStorage.getItem("nt_stars")||0),
-  auto:localStorage.getItem("nt_auto")!=="false",
-  colorHelp:localStorage.getItem("nt_color")!=="false",
-  done:JSON.parse(localStorage.getItem("nt_done")||"{}"),
+  mode:"jump",
+  stars:Number(localStorage.getItem("nt_rich_stars")||0),
+  auto:localStorage.getItem("nt_rich_auto")!=="false",
+  colorHelp:localStorage.getItem("nt_rich_color")!=="false",
+  done:JSON.parse(localStorage.getItem("nt_rich_done")||"{}"),
+  soundReady:false,
+  lastPrompt:"",
   cur:{}
 };
 const $=id=>document.getElementById(id);
@@ -144,23 +176,14 @@ function pick(a){return a[ri(0,a.length-1)]}
 function sh(a){return a.slice().sort(()=>Math.random()-.5)}
 function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
 function col(n){return COLORS[Math.abs(n)%COLORS.length]}
-function save(){localStorage.setItem("nt_stars",S.stars);localStorage.setItem("nt_auto",S.auto);localStorage.setItem("nt_color",S.colorHelp);localStorage.setItem("nt_done",JSON.stringify(S.done))}
+function save(){localStorage.setItem("nt_rich_stars",S.stars);localStorage.setItem("nt_rich_auto",S.auto);localStorage.setItem("nt_rich_color",S.colorHelp);localStorage.setItem("nt_rich_done",JSON.stringify(S.done))}
 function award(id){S.stars++;S.done[id]=true;save();topUI();navUI()}
 function isZh(v){const l=(v.lang||"").toLowerCase(),n=(v.name||"").toLowerCase();return l.indexOf("zh")===0||n.includes("chinese")||n.includes("mandarin")||n.includes("普通话")||n.includes("中文")}
 function bestVoice(){if(!window.speechSynthesis)return null;const vs=speechSynthesis.getVoices()||[];const zh=vs.filter(isZh);return zh.find(v=>(v.lang||"").toLowerCase()==="zh-cn")||zh[0]||null}
 function digitToCN(n){const d=["零","一","二","三","四","五","六","七","八","九"];n=Number(n);if(!Number.isFinite(n))return String(n);if(n<10)return d[n];if(n===10)return"十";if(n<20)return"十"+(n%10?d[n%10]:"");if(n<100)return d[Math.floor(n/10)]+"十"+(n%10?d[n%10]:"");if(n===100)return"一百";return String(n)}
 function readable(t){return String(t).replace(/\d+/g,m=>digitToCN(m))}
-function speak(t){
-  if(!window.speechSynthesis)return;
-  const u=new SpeechSynthesisUtterance(readable(t));
-  const v=bestVoice();
-  u.lang=v&&v.lang?v.lang:"zh-CN";
-  if(v)u.voice=v;
-  u.rate=.78;u.pitch=1.08;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
-}
-function auto(t){if(S.auto)setTimeout(()=>speak(t),250)}
+function speak(t){if(!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(readable(t));const v=bestVoice();u.lang=v&&v.lang?v.lang:"zh-CN";if(v)u.voice=v;u.rate=.78;u.pitch=1.08;speechSynthesis.cancel();speechSynthesis.speak(u)}
+function auto(t){S.lastPrompt=t;if(S.auto&&S.soundReady)setTimeout(()=>speak(t),250)}
 function topUI(){$("score").textContent="🏆 "+S.stars;$("autoBtn").classList.toggle("on",S.auto);$("colorBtn").classList.toggle("on",S.colorHelp)}
 function navUI(){
   $("nav").innerHTML="";
@@ -168,39 +191,41 @@ function navUI(){
     const b=document.createElement("button");
     b.className=S.stage===st.id?"active":"";
     b.innerHTML='<span class="ico">'+st.icon+'</span><span><strong>'+st.title+'</strong><small>'+st.sub+'</small></span>'+(S.done[st.id]?'<em class="done">✓</em>':'');
-    b.onclick=()=>{S.stage=st.id;speak(st.sub);render(true)};
+    b.onclick=()=>{S.soundReady=true;S.stage=st.id;speak(st.sub);render(true)};
     $("nav").appendChild(b);
   });
 }
 function head(t,s){$("title").textContent=t;$("subtitle").textContent=s}
 function choices(ans,min,max,count=4,spread=4){const set=new Set([ans]);while(set.size<count)set.add(clamp(ans+ri(-spread,spread),min,max));return sh([...set])}
 function promptHTML(o){
-  return '<div class="prompt" style="background:'+o.c.bg+';border-color:'+o.c.solid+'"><div class="emoji">'+o.e+'</div>'+(o.n!==undefined?'<button id="target" class="target" style="color:'+o.c.fg+';box-shadow:0 0 0 7px '+o.c.light+'">'+o.n+'</button>':'')+'<div><button id="listen" class="btn">🔊 听一听</button><div class="rule">听声音 → 看颜色 → 点大按钮</div><div class="adult">'+(o.h||"")+'</div></div></div>'
+  return '<div class="prompt" style="background:'+o.c.bg+';border-color:'+o.c.solid+'"><div class="emoji">'+o.e+'</div>'+(o.n!==undefined?'<button id="target" class="target" style="color:'+o.c.fg+';box-shadow:0 0 0 7px '+o.c.light+'">'+o.n+'</button>':'')+'<div><button id="listen" class="btn">🔊 听一听</button><div class="rule">'+(o.rule||'听声音 → 看颜色 → 点大按钮')+'</div><div class="adult">'+(o.h||"")+'</div></div></div>'
 }
-function bindPrompt(text,n){$("listen").onclick=()=>speak(text);const t=$("target");if(t)t.onclick=()=>speak("这是 "+n)}
+function bindPrompt(text,n){S.lastPrompt=text;$("listen").onclick=()=>{S.soundReady=true;speak(text)};const t=$("target");if(t)t.onclick=()=>{S.soundReady=true;speak("这是 "+n)}}
 function fb(g,t){const m=$("fb");if(m)m.innerHTML='<div class="feedback '+(g?"good":"hint")+'">'+t+'</div>'}
 function choiceHTML(n,c,hi){return '<button class="choice" data-n="'+n+'" style="color:'+c.fg+';border-color:'+(hi?c.solid:'transparent')+';box-shadow:'+(hi?'0 0 0 7px '+c.light:'0 10px 25px rgba(15,23,42,.08)')+'">'+n+'</button>'}
-function bindChoices(fn){document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)})}
+function bindChoices(fn){document.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{S.soundReady=true;const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)})}
+function correct(stage,text){fb(true,text);speak(text);award(stage)}
+function wrong(text){fb(false,text);speak(text)}
 function gameCount(newQ){
   head("点一点，数一数","孩子不识字也能玩：只要点彩色图案，程序会发音数数。");
   if(newQ||!S.cur.count)S.cur.count={target:ri(1,7),clicked:[]};
   const g=S.cur.count,c=col(g.target),icons=["🍎","🍌","🍓","🧸","🐥","🌸","⭐"],icon=icons[g.target%icons.length],p="请点"+c.name+"的小图案。点一个，听一个数字。";
   $("body").innerHTML=promptHTML({e:"👆",c,h:"先不要求孩子认数字，目标是一个一个点、一个一个数。"})+'<div class="objectGrid" style="background:'+c.bg+'">'+Array.from({length:g.target},(_,i)=>'<button class="obj" data-i="'+i+'" style="border-color:'+(g.clicked.includes(i)?c.solid:'transparent')+';transform:'+(g.clicked.includes(i)?'scale(1.06)':'scale(1)')+'">'+icon+'</button>').join("")+'</div><div class="counter"><div>刚刚点了</div><strong style="color:'+c.fg+'">'+g.clicked.length+'</strong></div><div id="fb"></div>';
-  bindPrompt(p);document.querySelectorAll(".obj").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i);if(g.clicked.includes(i))return;g.clicked.push(i);speak(g.clicked.length);gameCount(false);if(g.clicked.length===g.target){const t=pick(PRAISE)+" 一共有 "+g.target+" 个。";fb(true,t);setTimeout(()=>speak(t),450);award("count")}});auto(p)
+  bindPrompt(p);document.querySelectorAll(".obj").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i);if(g.clicked.includes(i))return;S.soundReady=true;g.clicked.push(i);speak(g.clicked.length);gameCount(false);if(g.clicked.length===g.target)correct("count",pick(PRAISE)+" 一共有 "+g.target+" 个。")});auto(p)
 }
 function gameFind(newQ){
   head("听声音，找数字","先让孩子按照声音和颜色找，不要求她读文字。");
   if(newQ||!S.cur.find){const target=ri(1,10);S.cur.find={target,choices:choices(target,1,10,4,3)}}
   const g=S.cur.find,c=col(g.target),p=S.colorHelp?"请找 "+g.target+"。它和大卡片一样，是"+c.name+"。":"请找 "+g.target+"。";
   $("body").innerHTML=promptHTML({e:"👂",n:g.target,c,h:"颜色帮忙开着时，正确答案和目标卡片同色；熟悉后可关闭颜色帮忙。"})+'<div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.target?c:col(n+2),S.colorHelp&&n===g.target)).join("")+'</div><div id="fb"></div>';
-  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target){const t=pick(PRAISE)+" 这是 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("find")}else{const t=pick(HINTS)+" 再找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target)correct("find",pick(PRAISE)+" 这是 "+g.target+"。");else wrong(pick(HINTS)+" 再找 "+g.target+"。")});auto(p)
 }
 function gameTrain(newQ){
   head("数字火车","练习数字顺序：前面是谁，后面是谁。");
   if(newQ||!S.cur.train){const start=ri(1,14),blank=ri(1,3),train=Array.from({length:5},(_,i)=>start+i),ans=train[blank];S.cur.train={train,blank,ans,choices:choices(ans,1,20,4,3)}}
   const g=S.cur.train,c=col(g.ans),p="数字火车少了一节。"+g.train[g.blank-1]+" 后面是谁？请找 "+g.ans+"。";
   $("body").innerHTML=promptHTML({e:"🚂",n:g.ans,c,h:"先用声音和颜色找答案，不急着说加一。"})+'<div class="train">'+g.train.map((n,i)=>'<div class="car" style="border-color:'+(i===g.blank?c.solid:'transparent')+';color:'+(i===g.blank?c.fg:'#1e293b')+'">'+(i===g.blank?'?':n)+'</div>').join("")+'</div><div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.ans?c:col(n+3),S.colorHelp&&n===g.ans)).join("")+'</div><div id="fb"></div>';
-  bindPrompt(p,g.ans);bindChoices(n=>{if(n===g.ans){const t=pick(PRAISE)+" "+g.ans+" 坐上了车厢。";fb(true,t);setTimeout(()=>speak(t),300);award("train")}else{const t=pick(HINTS)+" 再听一次，找 "+g.ans+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+  bindPrompt(p,g.ans);bindChoices(n=>{if(n===g.ans)correct("train",pick(PRAISE)+" "+g.ans+" 坐上了车厢。");else wrong(pick(HINTS)+" 再听一次，找 "+g.ans+"。")});auto(p)
 }
 function gameBox(newQ){
   head("十个装一盒","不用讲个位十位，先让孩子看见：十个是一盒。");
@@ -208,41 +233,144 @@ function gameBox(newQ){
   const g=S.cur.box,tens=Math.floor(g.target/10),ones=g.target%10,c=col(g.target),p="一盒是 10 个。这里有 "+tens+" 盒，还有 "+ones+" 个。请找总数 "+g.target+"。";
   const box='<div class="tenBox"><div class="boxLabel">10</div><div class="dots">'+Array.from({length:10},()=>'<span style="background:'+c.solid+'"></span>').join("")+'</div></div>';
   $("body").innerHTML=promptHTML({e:"📦",n:g.target,c,h:"这里用一盒十个替代十位，孩子更容易理解。"})+'<div class="boxArea" style="background:'+c.bg+'"><div class="boxes">'+Array.from({length:tens},()=>box).join("")+'</div><div class="loose">'+(ones===0?'<strong>0</strong>':Array.from({length:ones},()=>'<span style="border-color:'+c.solid+'"></span>').join(""))+'</div></div><div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.target?c:col(n+4),S.colorHelp&&n===g.target)).join("")+'</div><div id="fb"></div>';
-  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target){const t=pick(PRAISE)+" "+tens+" 盒，再加 "+ones+" 个，是 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("box")}else{const t=pick(HINTS)+" 看盒子，再找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+  bindPrompt(p,g.target);bindChoices(n=>{if(n===g.target)correct("box",pick(PRAISE)+" "+tens+" 盒，再加 "+ones+" 个，是 "+g.target+"。");else wrong(pick(HINTS)+" 看盒子，再找 "+g.target+"。")});auto(p)
 }
 function gridHTML(limit,target,highlightStartOnly){
   return '<div class="hundred">'+Array.from({length:100},(_,i)=>{const n=i+1,en=n<=limit,c=col(n);let st='';if(!en)st='visibility:hidden;';else if(n===target&&S.colorHelp)st='background:'+c.solid+';color:white;box-shadow:0 0 0 4px '+c.light;else if(n===target&&highlightStartOnly)st='background:'+c.bg+';color:'+c.fg+';border-color:'+c.solid;else st='background:white;color:'+c.fg;return '<button class="cell" data-n="'+n+'" style="'+st+'" '+(en?'':'disabled')+'>'+(en?n:'')+'</button>'}).join("")+'</div>'
 }
-function bindCells(fn){document.querySelectorAll(".cell").forEach(b=>{if(b.disabled)return;b.onclick=()=>{const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)}})}
+function bindCells(fn){document.querySelectorAll(".cell").forEach(b=>{if(b.disabled)return;b.onclick=()=>{S.soundReady=true;const n=Number(b.dataset.n);speak("我点了 "+n);fn(n)}})}
 function gameGrid(newQ,lim){
   head("小百数表","完整百数表不是起点。先开放一到二十，再慢慢到一百。");
   if(newQ||!S.cur.grid){const limit=lim||20;S.cur.grid={limit,target:ri(1,limit)}}if(lim){S.cur.grid.limit=lim;S.cur.grid.target=ri(1,lim)}
   const g=S.cur.grid,c=col(g.target),p="请在数字地图里找到 "+g.target+"。它现在是"+c.name+"的大数字。";
   $("body").innerHTML=promptHTML({e:"🗺️",n:g.target,c,h:"孩子只要听目标数字，然后在地图上点它。"})+'<div class="limitBtns">'+[20,50,100].map(n=>'<button class="toggle '+(g.limit===n?'on':'')+'" data-lim="'+n+'">练 1–'+n+'</button>').join("")+'</div>'+gridHTML(g.limit,g.target,false)+'<div id="fb"></div>';
-  bindPrompt(p,g.target);document.querySelectorAll("[data-lim]").forEach(b=>b.onclick=()=>gameGrid(true,Number(b.dataset.lim)));
-  bindCells(n=>{if(n===g.target){const t=pick(PRAISE)+" 找到了 "+g.target+"。";fb(true,t);setTimeout(()=>speak(t),300);award("grid")}else{const t=pick(HINTS)+" 再听一次，找 "+g.target+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+  bindPrompt(p,g.target);document.querySelectorAll("[data-lim]").forEach(b=>b.onclick=()=>{S.soundReady=true;gameGrid(true,Number(b.dataset.lim));if(S.lastPrompt)speak(S.lastPrompt)});
+  bindCells(n=>{if(n===g.target)correct("grid",pick(PRAISE)+" 找到了 "+g.target+"。");else wrong(pick(HINTS)+" 再听一次，找 "+g.target+"。")});auto(p)
 }
-function jumpTask(){
+function modeButtons(){
+  return '<div class="modeBtns">'+MODES.map(m=>'<button class="toggle '+(S.mode===m.id?'on':'')+'" data-mode="'+m.id+'">'+m.label+'</button>').join("")+'</div>'
+}
+function bindModeButtons(){
+  document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{S.soundReady=true;S.mode=b.dataset.mode;S.cur.hundred=null;gameHundred(true);if(S.lastPrompt)speak(S.lastPrompt)});
+}
+function validMove(start,delta){const dest=start+delta;if(dest<1||dest>100)return false;if(delta===1&&start%10===0)return false;if(delta===-1&&start%10===1)return false;return true}
+function makeOneStep(){
   const dirs=[
     {label:"往右走一格",delta:1,hint:"往右走，数字多一"},
     {label:"往左走一格",delta:-1,hint:"往左走，数字少一"},
     {label:"往下跳一格",delta:10,hint:"往下跳，数字多十"},
     {label:"往上跳一格",delta:-10,hint:"往上跳，数字少十"}
   ];
-  const tasks=[];for(let s=1;s<=100;s++){dirs.forEach(d=>{const dest=s+d.delta;if(dest<1||dest>100)return;if(d.delta===1&&s%10===0)return;if(d.delta===-1&&s%10===1)return;tasks.push({start:s,dest,dir:d})})}return pick(tasks)
+  const tasks=[];
+  for(let s=1;s<=100;s++)dirs.forEach(d=>{if(validMove(s,d.delta))tasks.push({start:s,dest:s+d.delta,steps:[d],kind:"jump"})});
+  return pick(tasks)
 }
-function gameJump(newQ){
-  head("百数表跳一跳","只高亮起点，不显示答案。孩子要根据方向自己找终点。");
-  if(newQ||!S.cur.jump)S.cur.jump=jumpTask();
-  const g=S.cur.jump,c=col(g.start),p="小兔子在 "+g.start+"。请让小兔子 "+g.dir.label+"。";
-  $("body").innerHTML=promptHTML({e:"🐰",n:g.start,c,h:"这里不再框出答案，只显示起点。孩子需要自己判断往哪一格跳。"})+gridHTML(100,g.start,true)+'<div id="fb"></div>';
-  bindPrompt(p,g.start);bindCells(n=>{if(n===g.dest){const t=pick(PRAISE)+" 从 "+g.start+" "+g.dir.label+"，到了 "+g.dest+"。";fb(true,t);setTimeout(()=>speak(t),300);award("jump")}else{const t=pick(HINTS)+" "+g.dir.hint+"。";fb(false,t);setTimeout(()=>speak(t),300)}});auto(p)
+function makeNeighbor(){return makeOneStep()}
+function makeStairs(){
+  const dirs=[
+    {label:"往下跳两层",delta:20,hint:"往下两层，是多二十"},
+    {label:"往上跳两层",delta:-20,hint:"往上两层，是少二十"},
+    {label:"往下跳一层",delta:10,hint:"往下跳，数字多十"},
+    {label:"往上跳一层",delta:-10,hint:"往上跳，数字少十"}
+  ];
+  const tasks=[];
+  for(let s=1;s<=100;s++)dirs.forEach(d=>{const dest=s+d.delta;if(dest>=1&&dest<=100)tasks.push({start:s,dest,steps:[d],kind:"stairs"})});
+  return pick(tasks)
 }
-function render(newQ=true){save();topUI();navUI();if(S.stage==="count")gameCount(newQ);else if(S.stage==="find")gameFind(newQ);else if(S.stage==="train")gameTrain(newQ);else if(S.stage==="box")gameBox(newQ);else if(S.stage==="grid")gameGrid(newQ);else gameJump(newQ)}
-$("newQ").onclick=()=>render(true);
+function makeRoute(){
+  const stepSets=[
+    [{label:"往右一格",delta:1},{label:"再往下跳一格",delta:10}],
+    [{label:"往下跳一格",delta:10},{label:"再往右一格",delta:1}],
+    [{label:"往左一格",delta:-1},{label:"再往下跳一格",delta:10}],
+    [{label:"往上跳一格",delta:-10},{label:"再往右一格",delta:1}],
+    [{label:"往右一格",delta:1},{label:"再往右一格",delta:1}],
+    [{label:"往下跳一格",delta:10},{label:"再往下跳一格",delta:10}]
+  ];
+  const tasks=[];
+  for(let s=1;s<=100;s++){
+    stepSets.forEach(steps=>{
+      let cur=s,ok=true;
+      for(const st of steps){if(!validMove(cur,st.delta)){ok=false;break}cur+=st.delta}
+      if(ok)tasks.push({start:s,dest:cur,steps,kind:"route"})
+    })
+  }
+  return pick(tasks)
+}
+function makeBlank(){
+  const types=["row","col"];
+  const type=pick(types);
+  let nums,blank,ans;
+  if(type==="row"){
+    const row=ri(0,9), start=row*10+ri(1,6);
+    nums=[start,start+1,start+2,start+3,start+4];
+    blank=ri(1,3); ans=nums[blank];
+  }else{
+    const col=ri(1,10), row=ri(0,5), start=row*10+col;
+    nums=[start,start+10,start+20,start+30,start+40];
+    blank=ri(1,3); ans=nums[blank];
+  }
+  return {kind:"blank",type,nums,blank,answer:ans,choices:choices(ans,1,100,4,12)}
+}
+function makeHundredTask(){
+  if(S.mode==="neighbor")return makeNeighbor();
+  if(S.mode==="blank")return makeBlank();
+  if(S.mode==="stairs")return makeStairs();
+  if(S.mode==="route")return makeRoute();
+  return makeOneStep();
+}
+function problemPrompt(g){
+  if(g.kind==="blank"){
+    return g.type==="row" ? "数字桥少了一块。请找中间少掉的数字。" : "数字电梯少了一层。请找中间少掉的数字。";
+  }
+  if(g.kind==="route"){
+    return "小兔子在 "+g.start+"。请让它"+g.steps.map(s=>s.label).join("，")+"。";
+  }
+  if(g.kind==="stairs"){
+    return "小兔子在 "+g.start+"。请让它"+g.steps[0].label+"。";
+  }
+  return "小兔子在 "+g.start+"。请让它"+g.steps[0].label+"。";
+}
+function routeChips(g){
+  if(!g.steps)return "";
+  return '<div class="pathBox"><span class="pathChip">起点 '+g.start+'</span>'+g.steps.map(s=>'<span class="pathChip">'+s.label+'</span>').join("")+'<span class="pathChip">点终点</span></div>';
+}
+function miniBlankHTML(g){
+  return '<div class="miniProblem">'+g.nums.map((n,i)=>'<div class="miniCell" style="border-color:'+(i===g.blank?'#fb923c':'transparent')+';color:'+(i===g.blank?'#fb923c':'#1e293b')+'">'+(i===g.blank?'?':n)+'</div>').join("")+'</div><div class="choiceGrid">'+g.choices.map(n=>choiceHTML(n,S.colorHelp&&n===g.answer?col(g.answer):col(n+5),S.colorHelp&&n===g.answer)).join("")+'</div>';
+}
+function gameHundred(newQ){
+  head("百数表游戏","新增 5 种玩法：跳一格、找邻居、补空格、上下楼、走路线。");
+  if(newQ||!S.cur.hundred)S.cur.hundred=makeHundredTask();
+  const g=S.cur.hundred;
+  const start=g.kind==="blank"?g.answer:g.start;
+  const c=col(start);
+  const p=problemPrompt(g);
+  const helper=g.kind==="blank"?"这里不显示百数表答案，只让孩子观察横排或竖排的规律。":"只高亮起点，不高亮答案。孩子需要根据方向自己找终点。";
+  let html=modeButtons()+promptHTML({e:g.kind==="blank"?"🧩":"🐰",n:start,c,h:helper,rule:"听声音 → 看起点或缺口 → 自己找答案"});
+  if(g.kind==="blank"){
+    html+=miniBlankHTML(g)+'<div id="fb"></div>';
+    $("body").innerHTML=html; bindModeButtons(); bindPrompt(p,start);
+    bindChoices(n=>{if(n===g.answer)correct("hundred",pick(PRAISE)+" 少掉的是 "+g.answer+"。");else wrong(pick(HINTS)+" 再观察这排数字。")});
+  }else{
+    html+=routeChips(g)+gridHTML(100,g.start,true)+'<div id="fb"></div>';
+    $("body").innerHTML=html; bindModeButtons(); bindPrompt(p,g.start);
+    bindCells(n=>{if(n===g.dest)correct("hundred",pick(PRAISE)+" 从 "+g.start+" 到了 "+g.dest+"。");else wrong(pick(HINTS)+" "+(g.steps[0].hint||"再看方向")+"。")});
+  }
+  auto(p);
+}
+function render(newQ=true){
+  save();topUI();navUI();
+  if(S.stage==="count")gameCount(newQ);
+  else if(S.stage==="find")gameFind(newQ);
+  else if(S.stage==="train")gameTrain(newQ);
+  else if(S.stage==="box")gameBox(newQ);
+  else if(S.stage==="grid")gameGrid(newQ);
+  else gameHundred(newQ);
+}
+$("newQ").onclick=()=>{S.soundReady=true;if(S.stage==="hundred")S.cur.hundred=null;render(true);if(S.lastPrompt)speak(S.lastPrompt)};
 $("autoBtn").onclick=()=>{S.auto=!S.auto;save();topUI()};
-$("colorBtn").onclick=()=>{S.colorHelp=!S.colorHelp;save();topUI();render(false)};
-$("testVoice").onclick=()=>speak("你好，我会说中文。一，二，三，四，五。请听声音，看颜色，点大数字。");
+$("colorBtn").onclick=()=>{S.colorHelp=!S.colorHelp;save();topUI();render(false);if(S.soundReady&&S.lastPrompt)speak(S.lastPrompt)};
+$("testVoice").onclick=()=>{S.soundReady=true;speak("你好，我会说中文。一，二，三，四，五。请听声音，看颜色，点大数字。")};
+$("startSound").onclick=()=>{S.soundReady=true;$("soundGate").classList.add("hide");speak("声音已经启动。你好，我会说中文。一，二，三。")};
 if(window.speechSynthesis){speechSynthesis.onvoiceschanged=()=>{}}
 render(true);
 </script>
